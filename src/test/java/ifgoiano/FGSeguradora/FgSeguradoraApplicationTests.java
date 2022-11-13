@@ -1,10 +1,10 @@
-package br.com.gf.locadora;
+package ifgoiano.FGSeguradora;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class LocadoraApplicationTests {
+class FgSeguradoraApplicationTests {
 
 	@Test
 	void contextLoads() {
