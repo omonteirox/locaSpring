@@ -14,17 +14,6 @@ import java.util.List;
 public class FgSeguradoraApplication {
 
 	public static void main(String[] args) {
-		//EXEMPLO DO FUNCIONAMENTO DE HERANÇA
-		Carro carro = new Carro();
-		Moto moto = new Moto();
-		List<Automovel> teste = new ArrayList<>();
-		teste.add(carro);
-		teste.add(moto);
-		Cliente cliente = new Cliente();
-		cliente.setAutomoveis(teste);
-		System.out.println(cliente.getAutomoveis());
-		//FIM EXEMPLO DO FUNCIONAMENTO DE HERANÇA
-
 
 		SpringApplication.run(FgSeguradoraApplication.class, args);
 
