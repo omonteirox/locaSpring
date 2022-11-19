@@ -1,4 +1,4 @@
-package ifgoiano.FGSeguradora.model;
+package ifgoiano.FGSeguradora.models;
 
 public class Carro extends Automovel{
     private Double cavalosPotencia;

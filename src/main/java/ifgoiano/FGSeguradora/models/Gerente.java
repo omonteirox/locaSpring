@@ -1,9 +1,8 @@
-package ifgoiano.FGSeguradora.model;
+package ifgoiano.FGSeguradora.models;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import java.util.ArrayList;
 
 @Entity
