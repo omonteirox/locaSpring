@@ -1,4 +1,4 @@
-package ifgoiano.FGSeguradora.model;
+package ifgoiano.FGSeguradora.models;
 
 public class Caminhao extends Automovel {
     private String cavalosPotencia;
