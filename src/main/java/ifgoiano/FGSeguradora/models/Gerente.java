@@ -6,24 +6,23 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
 public class Gerente{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
-    private Pessoa idPessoa;
-
     @Column(nullable = false)
     private String login;
 
     @Column(nullable = false)
     private String senha;
+
+    private String telefone;
 
     //@OneToMany
     //private ArrayList<Seguro> seguros;

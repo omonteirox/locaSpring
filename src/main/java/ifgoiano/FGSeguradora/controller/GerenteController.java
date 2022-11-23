@@ -19,7 +19,7 @@ public class GerenteController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Gerente> create(@RequestBody @Valid Gerente gerente){
+    public ResponseEntity<Gerente> create(@RequestBody Gerente gerente){
         Gerente newGerente = service.create(gerente);
         return ResponseEntity.ok().body(newGerente);
     }
