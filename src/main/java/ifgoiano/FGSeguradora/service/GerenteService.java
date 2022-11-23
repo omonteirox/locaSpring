@@ -19,6 +19,6 @@ public class GerenteService {
     }
 
     public Gerente create(Gerente gerente){
-        return  repository.save(gerente);
+        return repository.save(gerente);
     }
 }
