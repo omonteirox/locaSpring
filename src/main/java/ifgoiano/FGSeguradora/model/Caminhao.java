@@ -1,22 +1,19 @@
 package ifgoiano.FGSeguradora.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+//@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Caminhao extends Automovel {
+
     private String cavalosPotencia;
+
     private String Categoria;
 
-    public String getCavalosPotencia() {
-        return cavalosPotencia;
-    }
 
-    public void setCavalosPotencia(String cavalosPotencia) {
-        this.cavalosPotencia = cavalosPotencia;
-    }
-
-    public String getCategoria() {
-        return Categoria;
-    }
-
-    public void setCategoria(String categoria) {
-        Categoria = categoria;
-    }
 }

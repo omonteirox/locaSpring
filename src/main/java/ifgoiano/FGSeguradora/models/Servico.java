@@ -1,4 +1,4 @@
-package ifgoiano.FGSeguradora.model;
+package ifgoiano.FGSeguradora.models;
 
 import javax.persistence.*;
 import java.time.LocalDate;

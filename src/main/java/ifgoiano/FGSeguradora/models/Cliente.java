@@ -1,10 +1,10 @@
-package ifgoiano.FGSeguradora.model;
+package ifgoiano.FGSeguradora.models;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class Cliente extends Pessoa{
+public class Cliente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

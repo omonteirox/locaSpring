@@ -1,4 +1,4 @@
-package ifgoiano.FGSeguradora.model;
+package ifgoiano.FGSeguradora.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,9 +9,11 @@ import lombok.NoArgsConstructor;
 //@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Caminhonete extends Automovel {
+public class Caminhao extends Automovel {
 
-    private Double cavalosPotencia;
+    private String cavalosPotencia;
+
+    private String Categoria;
 
 
 }
