@@ -1,15 +1,16 @@
 package ifgoiano.FGSeguradora.models;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
 public class Servico {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false)
     private Double valor;
+    @Column(nullable = false)
     private String descricao;
     private LocalDate dataServicoPrestado;
 

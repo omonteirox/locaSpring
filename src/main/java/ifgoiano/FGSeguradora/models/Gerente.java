@@ -1,50 +1,31 @@
 package ifgoiano.FGSeguradora.models;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import java.util.ArrayList;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 
 @Entity
-public class Gerente extends Pessoa{
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class Gerente{
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @OneToOne
+    private Pessoa idPessoa;
+
+    @Column(nullable = false)
     private String login;
+
+    @Column(nullable = false)
     private String senha;
 
-    @OneToMany
-    private ArrayList<Seguro> seguros;
+    //@OneToMany
+    //private ArrayList<Seguro> seguros;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
-    public ArrayList<Seguro> getSeguros() {
-        return seguros;
-    }
-
-    public void setSeguros(ArrayList<Seguro> seguros) {
-        this.seguros = seguros;
-    }
 }

@@ -1,15 +1,25 @@
 package ifgoiano.FGSeguradora.models;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Sinistro {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private Boolean perdaParcial;
+
     private Boolean perdaTotal;
+    
+    @Column(nullable = false)
     private String descricao;
 
     @OneToOne
@@ -19,60 +29,4 @@ public class Sinistro {
     @OneToOne
     private Seguro seguro;
 
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Boolean getPerdaParcial() {
-        return perdaParcial;
-    }
-
-    public void setPerdaParcial(Boolean perdaParcial) {
-        this.perdaParcial = perdaParcial;
-    }
-
-    public Boolean getPerdaTotal() {
-        return perdaTotal;
-    }
-
-    public void setPerdaTotal(Boolean perdaTotal) {
-        this.perdaTotal = perdaTotal;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
-    public Contrato getContrato() {
-        return contrato;
-    }
-
-    public void setContrato(Contrato contrato) {
-        this.contrato = contrato;
-    }
-
-    public Seguro getSeguro() {
-        return seguro;
-    }
-
-    public void setSeguro(Seguro seguro) {
-        this.seguro = seguro;
-    }
 }

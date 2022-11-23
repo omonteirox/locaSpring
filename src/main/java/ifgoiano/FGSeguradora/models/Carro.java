@@ -1,31 +1,23 @@
 package ifgoiano.FGSeguradora.models;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.Column;
+
+@Data
+//@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Carro extends Automovel{
+
+    @Column(nullable = false)
     private Double cavalosPotencia;
+
+    @Column(nullable = false)
     private Integer quantidadePortas;
-    private String categoria;
 
-    public Double getCavalosPotencia() {
-        return cavalosPotencia;
-    }
 
-    public void setCavalosPotencia(Double cavalosPotencia) {
-        this.cavalosPotencia = cavalosPotencia;
-    }
-
-    public Integer getQuantidadePortas() {
-        return quantidadePortas;
-    }
-
-    public void setQuantidadePortas(Integer quantidadePortas) {
-        this.quantidadePortas = quantidadePortas;
-    }
-
-    public String getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
-    }
 }
