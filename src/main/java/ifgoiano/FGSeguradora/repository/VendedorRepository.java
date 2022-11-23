@@ -1,10 +1,12 @@
 package ifgoiano.FGSeguradora.repository;
 
 import ifgoiano.FGSeguradora.models.Gerente;
+import ifgoiano.FGSeguradora.models.Vendedor;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface GerenteRepository extends JpaRepository<Gerente, Long> {
-    Optional<Gerente> findByUserName(String usuario);
+public interface VendedorRepository extends JpaRepository<Vendedor,Long> {
+    Optional<Vendedor> findByUserName(String usuario);
+
 }
