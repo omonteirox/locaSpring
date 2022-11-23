@@ -18,10 +18,9 @@ public class GerenteController {
     public GerenteService service;
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Gerente> create(@RequestBody Gerente gerente){
-        Gerente newGerente = service.create(gerente);
-        return ResponseEntity.ok().body(newGerente);
+    public ResponseEntity<Gerente> create(@Valid @RequestBody Gerente gerente){
+        Gerente gerentenew = service.create(gerente);
+        return ResponseEntity.status(HttpStatus.CREATED).body(gerentenew);
     }
     @GetMapping
     public ResponseEntity<List<Gerente>> findAll(){
