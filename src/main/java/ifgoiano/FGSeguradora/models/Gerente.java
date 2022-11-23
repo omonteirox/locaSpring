@@ -10,14 +10,11 @@ import javax.persistence.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Gerente{
+public class Gerente extends Pessoa{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @OneToOne
-    private Pessoa idPessoa;
 
     @Column(nullable = false)
     private String login;
