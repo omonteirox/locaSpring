@@ -27,6 +27,7 @@
           <entry name="$MAVEN_REPOSITORY$/org/springframework/spring-context/4.0.3.RELEASE/spring-context-4.0.3.RELEASE.jar" />
           <entry name="$MAVEN_REPOSITORY$/joda-time/joda-time/2.9/joda-time-2.9.jar" />
         </processorPath>
+        <module name="locaSpring" />
         <module name="FGSeguradora" />
       </profile>
     </annotationProcessing>
@@ -34,6 +35,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="FGSeguradora" options="-parameters" />
+      <module name="locaSpring" options="-parameters" />
     </option>
   </component>
 </project>
