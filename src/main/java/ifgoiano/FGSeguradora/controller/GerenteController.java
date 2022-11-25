@@ -1,13 +1,16 @@
 package ifgoiano.FGSeguradora.controller;
 
+import ifgoiano.FGSeguradora.DTO.GerenteDTO;
 import ifgoiano.FGSeguradora.models.Gerente;
 import ifgoiano.FGSeguradora.service.GerenteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -25,9 +28,11 @@ public class GerenteController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity create(@RequestBody Gerente gerente) {
-        Gerente newGerente = service.create(gerente);
-        return ResponseEntity.ok().body(newGerente);
+    public ResponseEntity<GerenteDTO> create(@RequestBody @Valid GerenteDTO objDTO) {
+        Gerente newObj = service.create(objDTO);
+        URI uri = ServletUriComponentsBuilder
+                .fromCurrentRequest().path("/{id}").buildAndExpand(newObj.getId()).toUri();
+        return ResponseEntity.created(uri).build();
     }
 
     @GetMapping
@@ -37,9 +42,9 @@ public class GerenteController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Gerente> update(@Valid @PathVariable Long id, @RequestBody Gerente gerente) {
-        Gerente gerenteUpdate = service.update(id, gerente);
-        return ResponseEntity.ok().body(gerenteUpdate);
+    public ResponseEntity<GerenteDTO> update(@Valid @PathVariable Long id, @Valid @RequestBody GerenteDTO objDTO) {
+        GerenteDTO newObj = new GerenteDTO(service.update(id, objDTO));
+        return ResponseEntity.ok().body(newObj);
 
     }
 
