@@ -47,6 +47,6 @@ Abaixo, seguem links bem bacanas para aprofundar mais nas ferramentas usadas:
 * [Documentação oficial do Map Struct](https://mapstruct.org/)
 * [Referência para o padrão arquitetural REST](https://restfulapi.net/)
 
-Discentes: Felipe Ribeiro, Gustavo Monteiro
-Docente: Junio Cesar / Cristiane
+Discentes: Felipe Ribeiro, Gustavo Monteiro......
+Docente: Junio Cesar / Cristiane...........
 
