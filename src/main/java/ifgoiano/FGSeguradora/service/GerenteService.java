@@ -5,9 +5,7 @@ import ifgoiano.FGSeguradora.exception.DataIntegratyViolationException;
 import ifgoiano.FGSeguradora.exception.ObjectNotFoundException;
 import ifgoiano.FGSeguradora.models.Gerente;
 import ifgoiano.FGSeguradora.repository.GerenteRepository;
-import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,8 +18,7 @@ public class GerenteService {
     private GerenteRepository repository;
 
     public List<Gerente> findAll() {
-        List<Gerente> allGerente = repository.findAll();
-        return allGerente;
+        return repository.findAll();
     }
 
     public Gerente create(GerenteDTO objDTO) {
@@ -38,16 +35,6 @@ public class GerenteService {
                 objDTO.getEndereco()
              ));
     }
-//    Long id, String nome, @CPF String cpf, LocalDate dataNascimento, String genero,
-//    String endereco, Long id1, String login, String senha
-//      this.id = id;
-//        this.login = login;
-//        this.senha = senha;
-//        this.cpf = cpf;
-//        this.dataNascimento = dataNascimento;
-//        this.genero = genero;
-//        this.endereco = endereco;
-//        this.nome = nome;
     public Gerente findById(Long id) {
         Optional<Gerente> findGerente = repository.findById(id);
         return findGerente.orElseThrow(() -> new ObjectNotFoundException("Gerente não encontrado!! ID: " + id + ", Tipo: "
@@ -59,11 +46,12 @@ public class GerenteService {
         if(findByCPF(objDTO) !=null && findByCPF(objDTO).getId() != id){
             throw new DataIntegratyViolationException("CPF já cadastrado na base de dados!");
         }
+        gerenteUpdate.setNome(objDTO.getNome());
+        gerenteUpdate.setCpf(objDTO.getCpf());
+        gerenteUpdate.setDataNascimento(objDTO.getDataNascimento());
         gerenteUpdate.setLogin(objDTO.getLogin());
         gerenteUpdate.setSenha(objDTO.getSenha());
-        gerenteUpdate.setNome(objDTO.getNome());
         gerenteUpdate.setGenero(objDTO.getGenero());
-        gerenteUpdate.setDataNascimento(objDTO.getDataNascimento());
         gerenteUpdate.setEndereco(objDTO.getEndereco());
         return repository.save(gerenteUpdate);
     }
