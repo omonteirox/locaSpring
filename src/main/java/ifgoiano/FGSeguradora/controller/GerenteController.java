@@ -12,6 +12,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/gerente")
@@ -21,14 +22,13 @@ public class GerenteController {
     public GerenteService service;
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Gerente> findById(@RequestParam @Valid Long id) {
-        Gerente findGerente = service.findById(id);
-        return ResponseEntity.ok().body(findGerente);
+    public ResponseEntity<GerenteDTO> findById(@PathVariable Long id) {
+        GerenteDTO objDTO = new GerenteDTO(service.findById(id));
+        return ResponseEntity.ok().body(objDTO);
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<GerenteDTO> create(@RequestBody @Valid GerenteDTO objDTO) {
+    public ResponseEntity<GerenteDTO> create(@RequestBody GerenteDTO objDTO) {
         Gerente newObj = service.create(objDTO);
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest().path("/{id}").buildAndExpand(newObj.getId()).toUri();
@@ -36,13 +36,14 @@ public class GerenteController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Gerente>> findAll() {
-        List<Gerente> allGerente = service.findAll();
-        return ResponseEntity.ok().body(allGerente);
+    public ResponseEntity<List<GerenteDTO>> findAll() {
+        List<GerenteDTO> listDTO = service.findAll()
+                .stream().map(obj -> new GerenteDTO(obj)).collect(Collectors.toList());
+        return ResponseEntity.ok().body(listDTO);
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<GerenteDTO> update(@Valid @PathVariable Long id, @Valid @RequestBody GerenteDTO objDTO) {
+    public ResponseEntity<GerenteDTO> update(@PathVariable Long id, @RequestBody GerenteDTO objDTO) {
         GerenteDTO newObj = new GerenteDTO(service.update(id, objDTO));
         return ResponseEntity.ok().body(newObj);
 
