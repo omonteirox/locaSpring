@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Data
@@ -18,9 +19,9 @@ public class CarroDTO implements Serializable {
     private Long id;
     @Length(min = 5, max = 20, message = "O campo deve possuir de 5 até 20 caracteres")
     private String cor;
-    @NotEmpty(message = "Campo valorFipe requerido")
+    @NotNull(message = "Campo valorFipe requerido")
     private Double valorFipe;
-    @NotEmpty(message = "Campo Ano requerido")
+    @NotNull(message = "Campo Ano requerido")
     private Integer ano;
     @NotEmpty(message = "Campo placa requerido")
     private String placa;
@@ -30,6 +31,9 @@ public class CarroDTO implements Serializable {
     private String chassi;
     @NotEmpty(message = "Campo modelo requerido")
     private String modelo;
+    private Double cavalosPotencia;
+    @NotNull(message = "Campo quantidade de portas requerido")
+    private Integer quantidadePortas;
 
     public CarroDTO(Carro carro) {
         this.id = carro.getId();
@@ -40,11 +44,10 @@ public class CarroDTO implements Serializable {
         this.marca = carro.getMarca();
         this.chassi = carro.getChassi();
         this.modelo = carro.getModelo();
+        this.cavalosPotencia = carro.getCavalosPotencia();
+        this.quantidadePortas = carro.getQuantidadePortas();
     }
 
-    private Double cavalosPotencia;
-    @NotEmpty(message = "Campo quantidade de portas requerido")
-    private Integer quantidadePortas;
 
     public Long getId() {
         return id;
