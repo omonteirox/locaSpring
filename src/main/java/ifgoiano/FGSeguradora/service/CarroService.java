@@ -49,11 +49,12 @@ public class CarroService {
     }
 
     public Carro update(Long id, CarroDTO objDTO) {
-        // Long id, String cor, Double valorFipe, Integer ano, String placa, String marca, String Chassi, String modelo, Double cavalosPotencia, Integer quantidadePortas
         Carro carroUpdate = findById(id);
         carroUpdate.setCor(objDTO.getCor());
         carroUpdate.setValorFipe(objDTO.getValorFipe());
         carroUpdate.setAno(objDTO.getAno());
+        carroUpdate.setPlaca(objDTO.getPlaca());
+        carroUpdate.setMarca(objDTO.getMarca());
         carroUpdate.setChassi(objDTO.getChassi());
         carroUpdate.setModelo(objDTO.getModelo());
         carroUpdate.setCavalosPotencia(objDTO.getCavalosPotencia());
