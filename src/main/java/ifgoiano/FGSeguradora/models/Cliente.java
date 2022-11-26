@@ -9,8 +9,8 @@ public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToMany
-    private List<Automovel> automoveis;
+//    @OneToMany
+    private String automoveis;
 
     @OneToMany
     private List<Seguro> seguros;
@@ -23,11 +23,11 @@ public class Cliente {
         this.id = id;
     }
 
-    public List<Automovel> getAutomoveis() {
+    public String getAutomoveis() {
         return automoveis;
     }
 
-    public void setAutomoveis(List<Automovel> automoveis) {
+    public void setAutomoveis(String automoveis) {
         this.automoveis = automoveis;
     }
 

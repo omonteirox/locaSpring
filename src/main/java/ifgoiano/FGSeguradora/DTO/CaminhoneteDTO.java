@@ -1,6 +1,6 @@
 package ifgoiano.FGSeguradora.DTO;
 
-
+import ifgoiano.FGSeguradora.models.Caminhonete;
 import ifgoiano.FGSeguradora.models.Carro;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,7 +14,7 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CarroDTO implements Serializable {
+public class CaminhoneteDTO implements Serializable {
     private static final long serialVersionUID = 1l;
     private Long id;
     @Length(min = 5, max = 20, message = "O campo deve possuir de 5 até 20 caracteres")
@@ -33,22 +33,24 @@ public class CarroDTO implements Serializable {
     private String modelo;
     @NotNull(message = "Campo cavalos potencia requerido")
     private Double cavalosPotencia;
-    @NotNull(message = "Campo quantidade de portas requerido")
-    private Integer quantidadePortas;
+    @NotNull(message = "Campo carroceria requerido")
+    private boolean carroceriaDupla;
+    @NotNull(message = "Campo Quatro por quatro requerido")
+    private boolean quatroPorQuatro;
 
-    public CarroDTO(Carro carro) {
-        this.id = carro.getId();
-        this.cor = carro.getCor();
-        this.valorFipe = carro.getValorFipe();
-        this.ano = carro.getAno();
-        this.placa = carro.getPlaca();
-        this.marca = carro.getMarca();
-        this.chassi = carro.getChassi();
-        this.modelo = carro.getModelo();
-        this.cavalosPotencia = carro.getCavalosPotencia();
-        this.quantidadePortas = carro.getQuantidadePortas();
+    public CaminhoneteDTO(Caminhonete caminhonete) {
+        this.id = caminhonete.getId();
+        this.cor = caminhonete.getCor();
+        this.valorFipe = caminhonete.getValorFipe();
+        this.ano = caminhonete.getAno();
+        this.placa = caminhonete.getPlaca();
+        this.marca = caminhonete.getMarca();
+        this.chassi = caminhonete.getChassi();
+        this.modelo = caminhonete.getModelo();
+        this.cavalosPotencia = caminhonete.getCavalosPotencia();
+        this.carroceriaDupla = caminhonete.isCarroceriaDupla();
+        this.quatroPorQuatro = caminhonete.isQuatroPorQuatro();
     }
-
 
     public Long getId() {
         return id;
@@ -122,11 +124,20 @@ public class CarroDTO implements Serializable {
         this.cavalosPotencia = cavalosPotencia;
     }
 
-    public Integer getQuantidadePortas() {
-        return quantidadePortas;
+
+    public boolean isCarroceriaDupla() {
+        return carroceriaDupla;
     }
 
-    public void setQuantidadePortas(Integer quantidadePortas) {
-        this.quantidadePortas = quantidadePortas;
+    public void setCarroceriaDupla(boolean carroceriaDupla) {
+        this.carroceriaDupla = carroceriaDupla;
+    }
+
+    public boolean isQuatroPorQuatro() {
+        return quatroPorQuatro;
+    }
+
+    public void setQuatroPorQuatro(boolean quatroPorQuatro) {
+        this.quatroPorQuatro = quatroPorQuatro;
     }
 }

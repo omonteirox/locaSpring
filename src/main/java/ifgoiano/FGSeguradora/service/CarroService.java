@@ -1,7 +1,7 @@
 package ifgoiano.FGSeguradora.service;
 
 import ifgoiano.FGSeguradora.DTO.CarroDTO;
-import ifgoiano.FGSeguradora.DTO.GerenteDTO;
+import ifgoiano.FGSeguradora.exception.DataIntegratyViolationException;
 import ifgoiano.FGSeguradora.exception.ObjectNotFoundException;
 import ifgoiano.FGSeguradora.models.Carro;
 import ifgoiano.FGSeguradora.repository.CarroRepository;
@@ -24,6 +24,11 @@ public class CarroService {
     }
 
     public Carro create(@Valid CarroDTO objDTO) {
+        if (findByChassi(objDTO) != null)
+            throw new DataIntegratyViolationException("Chassi já cadastrado na base de dados!");
+        if (findByPlaca(objDTO) != null)
+            throw new DataIntegratyViolationException("Placa já cadastrado na base de dados!");
+
         return repository.save(new Carro(null,
                 objDTO.getCor(),
                 objDTO.getValorFipe(),
@@ -50,6 +55,10 @@ public class CarroService {
 
     public Carro update(Long id, CarroDTO objDTO) {
         Carro carroUpdate = findById(id);
+        if (objDTO.getChassi().equals(carroUpdate.getChassi()))
+            throw new DataIntegratyViolationException("Chassi já cadastrado na base de dados!");
+        if (objDTO.getPlaca().equals(carroUpdate.getPlaca()))
+            throw new DataIntegratyViolationException("Placa já cadastrado na base de dados!");
         carroUpdate.setCor(objDTO.getCor());
         carroUpdate.setValorFipe(objDTO.getValorFipe());
         carroUpdate.setAno(objDTO.getAno());
@@ -59,6 +68,23 @@ public class CarroService {
         carroUpdate.setModelo(objDTO.getModelo());
         carroUpdate.setCavalosPotencia(objDTO.getCavalosPotencia());
         carroUpdate.setQuantidadePortas(objDTO.getQuantidadePortas());
+
         return repository.save(carroUpdate);
+    }
+
+    private Carro findByChassi(CarroDTO objDTO) {
+        Carro obj = repository.findByChassi(objDTO.getChassi());
+        if (obj != null) {
+            return obj;
+        }
+        return null;
+    }
+
+    private Carro findByPlaca(CarroDTO objDTO) {
+        Carro obj = repository.findByPlaca(objDTO.getPlaca());
+        if (obj != null) {
+            return obj;
+        }
+        return null;
     }
 }

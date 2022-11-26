@@ -6,16 +6,15 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Entity
 @Data
-//@Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@MappedSuperclass
 public class Automovel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column
+
     private String cor;
 
     private Double valorFipe;
