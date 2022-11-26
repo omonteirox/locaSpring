@@ -21,17 +21,14 @@ public class Contrato {
     @Column(nullable = false)
     private Float valor;
 
-    @ManyToOne
-    private Vendedor vendedor;
+    private long vendedorID;
 
-    @OneToOne
-    private Cliente cliente;
+    private long clienteID;
 
     @Column(nullable = false)
     private String descricao;
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataValidade;
-
 
 
 }

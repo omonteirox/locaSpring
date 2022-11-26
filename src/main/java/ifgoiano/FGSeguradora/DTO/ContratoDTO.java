@@ -20,10 +20,8 @@ public class ContratoDTO implements Serializable {
 
     private Float valor;
 
-    private Vendedor vendedor;
-
-    private Cliente cliente;
-
+    private Long vendedorID;
+    private Long clienteID;
     private String descricao;
 
     private LocalDate dataValidade;
@@ -31,8 +29,8 @@ public class ContratoDTO implements Serializable {
     public ContratoDTO(Contrato contrato){
         this.id = contrato.getId();
         this.valor = contrato.getValor();
-        this.vendedor = contrato.getVendedor();
-        this.cliente = contrato.getCliente();
+        this.vendedorID = contrato.getVendedorID();
+        this.clienteID = contrato.getClienteID();
         this.descricao = contrato.getDescricao();
         this.dataValidade = contrato.getDataValidade();
     }
@@ -53,20 +51,20 @@ public class ContratoDTO implements Serializable {
         this.valor = valor;
     }
 
-    public Vendedor getVendedor() {
-        return vendedor;
+    public Long getVendedorID() {
+        return vendedorID;
     }
 
-    public void setVendedor(Vendedor vendedor) {
-        this.vendedor = vendedor;
+    public void setVendedorID(Long vendedorID) {
+        this.vendedorID = vendedorID;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public Long getClienteID() {
+        return clienteID;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setClienteID(Long clienteID) {
+        this.clienteID = clienteID;
     }
 
     public String getDescricao() {
