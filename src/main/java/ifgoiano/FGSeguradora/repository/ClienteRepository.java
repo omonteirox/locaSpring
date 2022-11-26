@@ -1,13 +1,12 @@
 package ifgoiano.FGSeguradora.repository;
 
+import ifgoiano.FGSeguradora.models.Cliente;
 import ifgoiano.FGSeguradora.models.Gerente;
-import ifgoiano.FGSeguradora.models.Terceirizado;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-public interface TerceirizadoRepository  extends JpaRepository<Terceirizado,Long> {
-
-    @Query("SELECT obj FROM Terceirizado obj WHERE obj.cnpj=:cnpj")
-    Terceirizado findByCNPJ(@Param("cnpj") String cnpj);
+public interface ClienteRepository extends JpaRepository<Cliente, Long> {
+    @Query("SELECT obj FROM Cliente obj WHERE obj.cpf=:cpf")
+    Cliente findByCPF(@Param("cpf") String cpf);
 }

@@ -32,9 +32,9 @@ public class Vendedor extends Pessoa{
     //@OneToMany
     private String contratos;
 
-    public Vendedor(Long id, String nome, @CPF String cpf, LocalDate dataNascimento, String login,
+    public Vendedor(String nome, @CPF String cpf, LocalDate dataNascimento, String login,
                    String senha, String genero, String endereco, Double salario, String contratos) {
-        super(id, nome, cpf, dataNascimento, genero, endereco);
+        super( nome, cpf, dataNascimento, genero, endereco);
         this.login = login;
         this.senha = senha;
         this.salario = salario;
