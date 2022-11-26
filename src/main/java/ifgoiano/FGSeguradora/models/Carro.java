@@ -10,7 +10,6 @@ import javax.persistence.Entity;
 
 @Entity
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Carro extends Automovel{

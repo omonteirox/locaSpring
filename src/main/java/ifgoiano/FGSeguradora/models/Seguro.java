@@ -26,7 +26,7 @@ public class Seguro {
     private Cliente cliente;
     @OneToOne
     private Sinistro sinitro;
-    @OneToOne
-    private Automovel automovel;
+//    @OneToOne
+//    private Automovel automovel;
 
 }
