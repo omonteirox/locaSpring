@@ -28,7 +28,6 @@ public class MotoService {
             throw new DataIntegratyViolationException("Chassi já cadastrado na base de dados!");
         if (findByPlaca(objDTO) != null)
             throw new DataIntegratyViolationException("Placa já cadastrado na base de dados!");
-
         return repository.save(new Moto(null,
                 objDTO.getCor(),
                 objDTO.getValorFipe(),
@@ -55,6 +54,10 @@ public class MotoService {
 
     public Moto update(Long id, MotoDTO objDTO) {
         Moto motoUpdate = findById(id);
+        if (objDTO.getChassi().equals(motoUpdate.getChassi()))
+            throw new DataIntegratyViolationException("Chassi já cadastrado na base de dados!");
+        if (objDTO.getPlaca().equals(motoUpdate.getPlaca()))
+            throw new DataIntegratyViolationException("Placa já cadastrado na base de dados!");
         motoUpdate.setCor(objDTO.getCor());
         motoUpdate.setValorFipe(objDTO.getValorFipe());
         motoUpdate.setAno(objDTO.getAno());
@@ -64,10 +67,7 @@ public class MotoService {
         motoUpdate.setModelo(objDTO.getModelo());
         motoUpdate.setCategoria(objDTO.getCategoria());
         motoUpdate.setCilindrada(objDTO.getCilindrada());
-        if (objDTO.getChassi().equals(motoUpdate.getChassi()))
-            throw new DataIntegratyViolationException("Chassi já cadastrado na base de dados!");
-        if (objDTO.getPlaca().equals(motoUpdate.getPlaca()))
-            throw new DataIntegratyViolationException("Placa já cadastrado na base de dados!");
+
         return repository.save(motoUpdate);
     }
 
