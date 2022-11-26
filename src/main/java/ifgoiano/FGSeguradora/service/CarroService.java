@@ -55,6 +55,10 @@ public class CarroService {
 
     public Carro update(Long id, CarroDTO objDTO) {
         Carro carroUpdate = findById(id);
+        if (objDTO.getChassi().equals(carroUpdate.getChassi()))
+            throw new DataIntegratyViolationException("Chassi já cadastrado na base de dados!");
+        if (objDTO.getPlaca().equals(carroUpdate.getPlaca()))
+            throw new DataIntegratyViolationException("Placa já cadastrado na base de dados!");
         carroUpdate.setCor(objDTO.getCor());
         carroUpdate.setValorFipe(objDTO.getValorFipe());
         carroUpdate.setAno(objDTO.getAno());
@@ -64,10 +68,7 @@ public class CarroService {
         carroUpdate.setModelo(objDTO.getModelo());
         carroUpdate.setCavalosPotencia(objDTO.getCavalosPotencia());
         carroUpdate.setQuantidadePortas(objDTO.getQuantidadePortas());
-        if (objDTO.getChassi().equals(carroUpdate.getChassi()))
-            throw new DataIntegratyViolationException("Chassi já cadastrado na base de dados!");
-        if (objDTO.getPlaca().equals(carroUpdate.getPlaca()))
-            throw new DataIntegratyViolationException("Placa já cadastrado na base de dados!");
+
         return repository.save(carroUpdate);
     }
 
