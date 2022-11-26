@@ -5,7 +5,6 @@ import ifgoiano.FGSeguradora.exception.DataIntegratyViolationException;
 import ifgoiano.FGSeguradora.exception.ObjectNotFoundException;
 import ifgoiano.FGSeguradora.models.Gerente;
 import ifgoiano.FGSeguradora.repository.GerenteRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.validation.Valid;
@@ -15,8 +14,11 @@ import java.util.Optional;
 @Service
 public class GerenteService {
 
-    @Autowired
-    private GerenteRepository repository;
+    private final GerenteRepository repository;
+
+    public GerenteService(GerenteRepository repository) {
+        this.repository = repository;
+    }
 
     public List<Gerente> findAll() {
         return repository.findAll();
