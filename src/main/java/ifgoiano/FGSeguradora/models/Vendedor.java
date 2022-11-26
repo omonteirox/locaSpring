@@ -4,8 +4,10 @@ package ifgoiano.FGSeguradora.models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -30,5 +32,13 @@ public class Vendedor extends Pessoa{
     //@OneToMany
     private String contratos;
 
+    public Vendedor(Long id, String nome, @CPF String cpf, LocalDate dataNascimento, String login,
+                   String senha, String genero, String endereco, Double salario, String contratos) {
+        super(id, nome, cpf, dataNascimento, genero, endereco);
+        this.login = login;
+        this.senha = senha;
+        this.salario = salario;
+        this.contratos= contratos;
+    }
 
 }
