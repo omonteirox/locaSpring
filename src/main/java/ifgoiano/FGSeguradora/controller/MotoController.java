@@ -1,8 +1,9 @@
 package ifgoiano.FGSeguradora.controller;
 
-import ifgoiano.FGSeguradora.DTO.CarroDTO;
-import ifgoiano.FGSeguradora.models.Carro;
-import ifgoiano.FGSeguradora.service.CarroService;
+import ifgoiano.FGSeguradora.DTO.MotoDTO;
+import ifgoiano.FGSeguradora.models.Moto;
+import ifgoiano.FGSeguradora.service.MotoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -13,35 +14,39 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/carro")
-public class CarroController {
-    public final CarroService service;
+@RequestMapping("/moto")
+public class MotoController {
+    public final MotoService service;
 
-    public CarroController(CarroService service) {
+    public MotoController(MotoService service) {
         this.service = service;
     }
+
+
     @GetMapping(value = "/{id}")
-    public ResponseEntity<CarroDTO> findById(@PathVariable Long id) {
-        CarroDTO objDTO = new CarroDTO(service.findById(id));
+    public ResponseEntity<MotoDTO> findById(@PathVariable Long id) {
+        MotoDTO objDTO = new MotoDTO(service.findById(id));
         return ResponseEntity.ok().body(objDTO);
     }
+
     @PostMapping
-    public ResponseEntity<CarroDTO> create(@Valid @RequestBody CarroDTO objDTO) {
-        Carro newObj = service.create(objDTO);
+    public ResponseEntity<MotoDTO> create(@Valid @RequestBody MotoDTO objDTO) {
+        Moto newObj = service.create(objDTO);
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest().path("/{id}").buildAndExpand(newObj.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
+
     @GetMapping
-    public ResponseEntity<List<CarroDTO>> findAll() {
-        List<CarroDTO> listDTO = service.findAll()
-                .stream().map(obj -> new CarroDTO(obj)).collect(Collectors.toList());
+    public ResponseEntity<List<MotoDTO>> findAll() {
+        List<MotoDTO> listDTO = service.findAll()
+                .stream().map(obj -> new MotoDTO(obj)).collect(Collectors.toList());
         return ResponseEntity.ok().body(listDTO);
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<CarroDTO> update(@PathVariable Long id, @Valid @RequestBody CarroDTO objDTO) {
-        CarroDTO newObj = new CarroDTO(service.update(id, objDTO));
+    public ResponseEntity<MotoDTO> update(@PathVariable Long id, @Valid @RequestBody MotoDTO objDTO) {
+        MotoDTO newObj = new MotoDTO(service.update(id, objDTO));
         return ResponseEntity.ok().body(newObj);
 
     }

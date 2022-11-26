@@ -1,7 +1,6 @@
 package ifgoiano.FGSeguradora.DTO;
 
-
-import ifgoiano.FGSeguradora.models.Carro;
+import ifgoiano.FGSeguradora.models.Moto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,7 +13,7 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CarroDTO implements Serializable {
+public class MotoDTO implements Serializable {
     private static final long serialVersionUID = 1l;
     private Long id;
     @Length(min = 5, max = 20, message = "O campo deve possuir de 5 até 20 caracteres")
@@ -31,24 +30,21 @@ public class CarroDTO implements Serializable {
     private String chassi;
     @NotEmpty(message = "Campo modelo requerido")
     private String modelo;
-    @NotNull(message = "Campo cavalos potencia requerido")
-    private Double cavalosPotencia;
-    @NotNull(message = "Campo quantidade de portas requerido")
-    private Integer quantidadePortas;
+    private String categoria;
+    private Double cilindrada;
 
-    public CarroDTO(Carro carro) {
-        this.id = carro.getId();
-        this.cor = carro.getCor();
-        this.valorFipe = carro.getValorFipe();
-        this.ano = carro.getAno();
-        this.placa = carro.getPlaca();
-        this.marca = carro.getMarca();
-        this.chassi = carro.getChassi();
-        this.modelo = carro.getModelo();
-        this.cavalosPotencia = carro.getCavalosPotencia();
-        this.quantidadePortas = carro.getQuantidadePortas();
+    public MotoDTO(Moto moto){
+        this.id = moto.getId();
+        this.cor = moto.getCor();
+        this.valorFipe = moto.getValorFipe();
+        this.ano = moto.getAno();
+        this.placa = moto.getPlaca();
+        this.marca = moto.getMarca();
+        this.chassi = moto.getChassi();
+        this.modelo = moto.getModelo();
+        this.categoria = moto.getCategoria();
+        this.cilindrada = moto.getCilindrada();
     }
-
 
     public Long getId() {
         return id;
@@ -114,19 +110,19 @@ public class CarroDTO implements Serializable {
         this.modelo = modelo;
     }
 
-    public Double getCavalosPotencia() {
-        return cavalosPotencia;
+    public String getCategoria() {
+        return categoria;
     }
 
-    public void setCavalosPotencia(Double cavalosPotencia) {
-        this.cavalosPotencia = cavalosPotencia;
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 
-    public Integer getQuantidadePortas() {
-        return quantidadePortas;
+    public Double getCilindrada() {
+        return cilindrada;
     }
 
-    public void setQuantidadePortas(Integer quantidadePortas) {
-        this.quantidadePortas = quantidadePortas;
+    public void setCilindrada(Double cilindrada) {
+        this.cilindrada = cilindrada;
     }
 }
