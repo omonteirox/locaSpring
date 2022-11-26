@@ -1,6 +1,7 @@
 package ifgoiano.FGSeguradora.models;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,7 +29,9 @@ public class Contrato {
 
     @Column(nullable = false)
     private String descricao;
-
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataValidade;
+
+
 
 }
