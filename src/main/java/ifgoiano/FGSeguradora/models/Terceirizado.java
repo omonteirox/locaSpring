@@ -1,15 +1,12 @@
 package ifgoiano.FGSeguradora.models;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 public class Terceirizado {
 
@@ -24,9 +21,16 @@ public class Terceirizado {
     private String telefone;
 
     @Column(nullable = false, unique=true)
-    private String CNPJ;
+    private String cnpj;
 
-    @ManyToMany
-    private List<Servico> servico;
+    //@ManyToMany
+    private String servico;
 
+    public Terceirizado(Long id, String razaoSocial, String telefone, String cnpj, String servico) {
+        this.id = id;
+        this.razaoSocial = razaoSocial;
+        this.telefone = telefone;
+        this.cnpj = cnpj;
+        this.servico = servico;
+    }
 }

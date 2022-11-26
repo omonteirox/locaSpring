@@ -1,41 +1,35 @@
 package ifgoiano.FGSeguradora.models;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.br.CPF;
+
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-public class Cliente {
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Cliente extends Pessoa{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-//    @OneToMany
+
+    //@OneToMany
     private String automoveis;
 
-    @OneToMany
-    private List<Seguro> seguros;
+    //@OneToMany List<Seguro>
+    private String seguros;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getAutomoveis() {
-        return automoveis;
-    }
-
-    public void setAutomoveis(String automoveis) {
-        this.automoveis = automoveis;
-    }
-
-    public List<Seguro> getSeguros() {
-        return seguros;
-    }
-
-    public void setSeguros(List<Seguro> seguros) {
-        this.seguros = seguros;
+    public Cliente(String nome, @CPF String cpf, LocalDate dataNascimento, String genero,
+                   String endereco, String automoveis,
+                   String seguros) {
+        super( nome, cpf, dataNascimento, genero, endereco);
+        this.automoveis=automoveis;
+        this.seguros= seguros;
     }
 }
