@@ -21,6 +21,9 @@ public class Contrato {
     @Column(nullable = false)
     private Float valor;
 
+    private long vendedorID;
+    private long clienteID;
+
     @ManyToOne
     private Vendedor vendedor;
 
@@ -32,6 +35,12 @@ public class Contrato {
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataValidade;
 
-
-
+    public Contrato(Long id, Float valor, long vendedorID, long clienteID, String descricao, LocalDate dataValidade) {
+        this.id = id;
+        this.valor = valor;
+        this.vendedorID = vendedorID;
+        this.clienteID = clienteID;
+        this.descricao = descricao;
+        this.dataValidade = dataValidade;
+    }
 }

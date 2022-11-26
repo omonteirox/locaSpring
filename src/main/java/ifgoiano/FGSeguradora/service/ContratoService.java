@@ -28,8 +28,8 @@ public class ContratoService {
         return repository.save(new Contrato(
                 null,
                 objDTO.getValor(),
-                objDTO.getVendedor(),
-                objDTO.getCliente(),
+                objDTO.getVendedorID(),
+                objDTO.getClienteID(),
                 objDTO.getDescricao(),
                 objDTO.getDataValidade()
         ));
@@ -49,8 +49,8 @@ public class ContratoService {
     public Contrato update(Long id, ContratoDTO objDTO) {
         Contrato contratoUpdate = findById(id);
         contratoUpdate.setValor(objDTO.getValor());
-        contratoUpdate.setVendedor(objDTO.getVendedor());
-        contratoUpdate.setCliente(objDTO.getCliente());
+        contratoUpdate.setVendedorID(objDTO.getVendedorID());
+        contratoUpdate.setClienteID(objDTO.getVendedorID());
         contratoUpdate.setDescricao(objDTO.getDescricao());
         contratoUpdate.setDataValidade(objDTO.getDataValidade());
         return repository.save(contratoUpdate);
