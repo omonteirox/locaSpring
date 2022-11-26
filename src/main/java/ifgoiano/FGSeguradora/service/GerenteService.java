@@ -8,6 +8,7 @@ import ifgoiano.FGSeguradora.repository.GerenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,7 +22,7 @@ public class GerenteService {
         return repository.findAll();
     }
 
-    public Gerente create(GerenteDTO objDTO) {
+    public Gerente create(@Valid GerenteDTO objDTO) {
         if(findByCPF(objDTO) != null){
             throw new DataIntegratyViolationException("CPF já cadastrado na base de dados!");
         }
@@ -32,7 +33,8 @@ public class GerenteService {
                 objDTO.getLogin(),
                 objDTO.getSenha(),
                 objDTO.getGenero(),
-                objDTO.getEndereco()
+                objDTO.getEndereco(),
+                objDTO.getSeguros()
              ));
     }
     public Gerente findById(Long id) {
@@ -53,6 +55,7 @@ public class GerenteService {
         gerenteUpdate.setSenha(objDTO.getSenha());
         gerenteUpdate.setGenero(objDTO.getGenero());
         gerenteUpdate.setEndereco(objDTO.getEndereco());
+        gerenteUpdate.setSeguros(objDTO.getSeguros());
         return repository.save(gerenteUpdate);
     }
 

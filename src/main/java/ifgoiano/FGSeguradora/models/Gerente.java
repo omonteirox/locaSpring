@@ -26,20 +26,15 @@ public class Gerente extends Pessoa {
     private String senha;
 
     //@OneToMany
-    //private ArrayList<Seguro> seguros;
+    private String seguros;
 
-//  objDTO.getNome(),
-//          objDTO.getCpf(),
-//          objDTO.getDataNascimento(),
-//          objDTO.getLogin(),
-//          objDTO.getSenha(),
-//          objDTO.getGenero(),
-//          objDTO.getEndereco()
+
     public Gerente(Long id, String nome, @CPF String cpf, LocalDate dataNascimento, String login,
-                   String senha, String genero, String endereco) {
+                   String senha, String genero, String endereco, String seguros) {
         super(id, nome, cpf, dataNascimento, genero, endereco);
         this.login = login;
         this.senha = senha;
+        this.seguros= seguros;
     }
 
 

@@ -10,6 +10,7 @@ import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -17,7 +18,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class GerenteDTO implements Serializable {
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1l;
     private Long id;
     @NotEmpty(message = "Campo NOME é requerido.")
     @Length(min = 3, max = 100, message = "O campo nome deve possuir entre 3 á 100 caracteres.")
@@ -25,9 +26,8 @@ public class GerenteDTO implements Serializable {
     @CPF
     @NotEmpty(message = "Campo CPF é requerido.")
     private String cpf;
-    @NotEmpty(message = "Campo dataNascimento é requerido.")
     @JsonFormat(pattern = "dd/MM/yyyy")
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @NotNull(message = "A data é obrigatória!")
     private LocalDate dataNascimento;
     @NotEmpty(message = "Campo LOGIN é requerido.")
     @Length(min = 3, max = 100, message = "O campo login deve possuir entre 3 á 50 caracteres.")
@@ -42,6 +42,8 @@ public class GerenteDTO implements Serializable {
     @Length(min = 3, max = 100, message = "O campo ENDERECO deve possuir entre 3 á 10 caracteres.")
     private String endereco;
 
+    private String seguros;
+
 
     public GerenteDTO(Gerente gerente) {
         this.id = gerente.getId();
@@ -52,8 +54,78 @@ public class GerenteDTO implements Serializable {
         this.senha = gerente.getSenha();
         this.genero = gerente.getGenero();
         this.endereco = gerente.getEndereco();
-
+        this.seguros = gerente.getSeguros();
     }
 
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public LocalDate getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(LocalDate dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+    public String getSeguros() {
+        return seguros;
+    }
+
+    public void setSeguros(String seguros) {
+        this.seguros = seguros;
+    }
 }

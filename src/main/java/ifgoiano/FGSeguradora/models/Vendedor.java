@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Vendedor {
+public class Vendedor extends Pessoa{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,8 +27,8 @@ public class Vendedor {
     @Column(nullable = false)
     private Double salario;
 
-    @OneToMany
-    private List<Contrato> contratos;
+    //@OneToMany
+    private String contratos;
 
 
 }
