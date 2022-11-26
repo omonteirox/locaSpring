@@ -9,6 +9,7 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -30,16 +31,17 @@ public class GerenteDTO implements Serializable {
     @NotNull(message = "A data é obrigatória!")
     private LocalDate dataNascimento;
     @NotEmpty(message = "Campo LOGIN é requerido.")
-    @Length(min = 3, max = 100, message = "O campo login deve possuir entre 3 á 50 caracteres.")
+    @Length(min = 3, max = 100, message = "O campo login deve possuir entre 3 á 100 caracteres.")
+    @Email
     private String login;
     @NotEmpty(message = "Campo SENHA é requerido.")
-    @Length(min = 3, max = 100, message = "O campo SENHA deve possuir entre 3 á 50 caracteres.")
+    @Length(min = 3, max = 100, message = "O campo SENHA deve possuir entre 3 á 100 caracteres.")
     private String senha;
     @NotEmpty(message = "Campo GENERO é requerido.")
-    @Length(min = 3, max = 100, message = "O campo GENERO deve possuir entre 3 á 10 caracteres.")
+    @Length(min = 3, max = 10, message = "O campo GENERO deve possuir entre 3 á 10 caracteres.")
     private String genero;
     @NotEmpty(message = "Campo ENDERECO é requerido.")
-    @Length(min = 3, max = 100, message = "O campo ENDERECO deve possuir entre 3 á 10 caracteres.")
+    @Length(min = 3, max = 100, message = "O campo ENDERECO deve possuir entre 3 á 100 caracteres.")
     private String endereco;
 
     private String seguros;
