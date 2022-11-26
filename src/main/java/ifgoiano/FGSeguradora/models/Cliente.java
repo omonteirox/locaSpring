@@ -25,10 +25,11 @@ public class Cliente extends Pessoa{
     //@OneToMany List<Seguro>
     private String seguros;
 
-    public Cliente(String nome, @CPF String cpf, LocalDate dataNascimento, String genero,
+    public Cliente(Long id, String nome, @CPF String cpf, LocalDate dataNascimento, String genero,
                    String endereco, String automoveis,
                    String seguros) {
         super( nome, cpf, dataNascimento, genero, endereco);
+        this.id=id;
         this.automoveis=automoveis;
         this.seguros= seguros;
     }

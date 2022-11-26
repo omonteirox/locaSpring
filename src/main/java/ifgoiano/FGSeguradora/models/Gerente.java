@@ -29,9 +29,10 @@ public class Gerente extends Pessoa {
     private String seguros;
 
 
-    public Gerente(String nome, @CPF String cpf, LocalDate dataNascimento, String login,
+    public Gerente(Long id, String nome, @CPF String cpf, LocalDate dataNascimento, String login,
                    String senha, String genero, String endereco, String seguros) {
         super(nome, cpf, dataNascimento, genero, endereco);
+        this.id= id;
         this.login = login;
         this.senha = senha;
         this.seguros= seguros;
