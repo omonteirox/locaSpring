@@ -66,5 +66,4 @@ public class ContratoService {
         return repository.save(contratoUpdate);
     }
 
-
 }

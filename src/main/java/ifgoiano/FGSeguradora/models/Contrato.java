@@ -31,4 +31,6 @@ public class Contrato {
     private LocalDate dataValidade;
 
 
+
+
 }
