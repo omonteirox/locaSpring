@@ -1,6 +1,7 @@
 package ifgoiano.FGSeguradora.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import ifgoiano.FGSeguradora.enums.Genero;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,7 +28,7 @@ public class Pessoa {
     //@DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataNascimento;
 
-    private String genero;
+    private Genero genero;
 
     private String endereco;
 

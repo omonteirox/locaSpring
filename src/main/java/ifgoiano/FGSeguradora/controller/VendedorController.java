@@ -1,11 +1,8 @@
 package ifgoiano.FGSeguradora.controller;
 
 
-import ifgoiano.FGSeguradora.DTO.ContratoDTO;
-import ifgoiano.FGSeguradora.DTO.GerenteDTO;
 import ifgoiano.FGSeguradora.DTO.VendedorDTO;
 import ifgoiano.FGSeguradora.models.Vendedor;
-import ifgoiano.FGSeguradora.service.ContratoService;
 import ifgoiano.FGSeguradora.service.VendedorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,16 +22,18 @@ public class VendedorController {
     private VendedorService service;
 
     @GetMapping
-    public ResponseEntity<List<VendedorDTO>> findAll(){
-        List<VendedorDTO> objDTO = service.findAll().
-                stream().map(obj -> new VendedorDTO(obj)).collect(Collectors.toList());
-        return ResponseEntity.ok().body(objDTO);
+    public ResponseEntity<List<Vendedor>> findAll(){
+        List<Vendedor> vend = service.findAll();
+        return ResponseEntity.ok().body(vend);
+//        List<VendedorDTO> objDTO = service.findAll().
+//                stream().map(obj -> new VendedorDTO(obj)).collect(Collectors.toList());
+//        return ResponseEntity.ok().body(objDTO);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<VendedorDTO> findById(@PathVariable Long id){
-        VendedorDTO objDTO = new VendedorDTO(service.findById(id));
-        return ResponseEntity.ok().body(objDTO);
+    public ResponseEntity<Vendedor> findById(@PathVariable Long id){
+        Vendedor obj = service.findById(id);
+        return ResponseEntity.ok().body(obj);
     }
 
     @PostMapping

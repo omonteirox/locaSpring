@@ -1,5 +1,6 @@
 package ifgoiano.FGSeguradora.DTO;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import ifgoiano.FGSeguradora.models.Cliente;
 import ifgoiano.FGSeguradora.models.Contrato;
 import ifgoiano.FGSeguradora.models.Vendedor;
@@ -24,7 +25,9 @@ public class ContratoDTO implements Serializable {
     private Long clienteID;
     private String descricao;
 
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataValidade;
+
 
 
     public ContratoDTO(Contrato contrato){
@@ -34,6 +37,7 @@ public class ContratoDTO implements Serializable {
         this.clienteID = contrato.getClienteID();
         this.descricao = contrato.getDescricao();
         this.dataValidade = contrato.getDataValidade();
+
     }
 
     public Long getId() {
