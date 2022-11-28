@@ -29,7 +29,7 @@ public class Vendedor extends Pessoa{
     @Column(nullable = false)
     private Double salario;
 
-    //@OneToMany
+
     private String contratos;
 
     public Vendedor(Long id, String nome, @CPF String cpf, LocalDate dataNascimento, String login,

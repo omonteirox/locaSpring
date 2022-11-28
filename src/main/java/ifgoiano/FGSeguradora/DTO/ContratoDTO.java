@@ -26,6 +26,7 @@ public class ContratoDTO implements Serializable {
 
     private LocalDate dataValidade;
 
+
     public ContratoDTO(Contrato contrato){
         this.id = contrato.getId();
         this.valor = contrato.getValor();

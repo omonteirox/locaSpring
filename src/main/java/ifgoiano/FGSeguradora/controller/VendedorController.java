@@ -1,9 +1,11 @@
 package ifgoiano.FGSeguradora.controller;
 
 
+import ifgoiano.FGSeguradora.DTO.ContratoDTO;
 import ifgoiano.FGSeguradora.DTO.GerenteDTO;
 import ifgoiano.FGSeguradora.DTO.VendedorDTO;
 import ifgoiano.FGSeguradora.models.Vendedor;
+import ifgoiano.FGSeguradora.service.ContratoService;
 import ifgoiano.FGSeguradora.service.VendedorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

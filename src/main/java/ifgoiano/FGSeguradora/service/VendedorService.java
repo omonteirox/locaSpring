@@ -1,9 +1,11 @@
 package ifgoiano.FGSeguradora.service;
 
+import ifgoiano.FGSeguradora.DTO.ContratoDTO;
 import ifgoiano.FGSeguradora.DTO.GerenteDTO;
 import ifgoiano.FGSeguradora.DTO.VendedorDTO;
 import ifgoiano.FGSeguradora.exception.DataIntegratyViolationException;
 import ifgoiano.FGSeguradora.exception.ObjectNotFoundException;
+import ifgoiano.FGSeguradora.models.Contrato;
 import ifgoiano.FGSeguradora.models.Gerente;
 import ifgoiano.FGSeguradora.models.Vendedor;
 import ifgoiano.FGSeguradora.repository.VendedorRepository;
@@ -66,6 +68,7 @@ public class VendedorService {
         findById(id);
         repository.deleteById(id);
     }
+
 
     private Vendedor findByCPF(VendedorDTO objDTO){
         Vendedor obj = repository.findByCPF(objDTO.getCpf());
