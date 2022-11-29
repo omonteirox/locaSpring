@@ -27,15 +27,13 @@ public class ClienteService {
         if (findByCPF(objDTO) != null) {
             throw new DataIntegratyViolationException("CPF já cadastrado na base de dados!");
         }
-        return repository.save(new Cliente(null,
-                objDTO.getNome(),
+        return repository.save(new Cliente(objDTO.getNome(),
                 objDTO.getCpf(),
                 objDTO.getDataNascimento(),
                 objDTO.getGenero(),
                 objDTO.getEndereco(),
-                objDTO.getAutomoveis(),
-                objDTO.getSeguros()
-        ));
+                null
+                ));
     }
 
     public Cliente findById(Long id) {
@@ -54,8 +52,6 @@ public class ClienteService {
         newObj.setDataNascimento(objDTO.getDataNascimento());
         newObj.setGenero(objDTO.getGenero());
         newObj.setEndereco(objDTO.getEndereco());
-        newObj.setAutomoveis(objDTO.getAutomoveis());
-        newObj.setSeguros(objDTO.getSeguros());
         return repository.save(newObj);
     }
 

@@ -51,7 +51,6 @@ public class ClienteDTO implements Serializable {
         this.dataNascimento = cliente.getDataNascimento();
         this.genero = cliente.getGenero();
         this.endereco = cliente.getEndereco();
-        this.automoveis= cliente.getAutomoveis();
         this.seguros = cliente.getSeguros();
     }
 
