@@ -1,5 +1,6 @@
 package ifgoiano.FGSeguradora.models;
 
+import ifgoiano.FGSeguradora.enums.Genero;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,7 +31,7 @@ public class Gerente extends Pessoa {
 
 
     public Gerente(Long id, String nome, @CPF String cpf, LocalDate dataNascimento, String login,
-                   String senha, String genero, String endereco, String seguros) {
+                   String senha, Genero genero, String endereco, String seguros) {
         super(nome, cpf, dataNascimento, genero, endereco);
         this.id= id;
         this.login = login;

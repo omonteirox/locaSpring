@@ -1,12 +1,8 @@
 package ifgoiano.FGSeguradora.service;
 
-import ifgoiano.FGSeguradora.DTO.ContratoDTO;
-import ifgoiano.FGSeguradora.DTO.GerenteDTO;
 import ifgoiano.FGSeguradora.DTO.VendedorDTO;
 import ifgoiano.FGSeguradora.exception.DataIntegratyViolationException;
 import ifgoiano.FGSeguradora.exception.ObjectNotFoundException;
-import ifgoiano.FGSeguradora.models.Contrato;
-import ifgoiano.FGSeguradora.models.Gerente;
 import ifgoiano.FGSeguradora.models.Vendedor;
 import ifgoiano.FGSeguradora.repository.VendedorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +41,8 @@ public class VendedorService {
                 objDTO.getGenero(),
                 objDTO.getEndereco(),
                 objDTO.getSalario(),
-                objDTO.getContratos()));
+                null
+        ));
     }
     public Vendedor update(Long id, VendedorDTO objDTO) {
         Vendedor vendedorUpdate = findById(id);
@@ -60,7 +57,7 @@ public class VendedorService {
         vendedorUpdate.setGenero(objDTO.getGenero());
         vendedorUpdate.setEndereco(objDTO.getEndereco());
         vendedorUpdate.setSalario(objDTO.getSalario());
-        vendedorUpdate.setContratos(objDTO.getContratos());
+        //vendedorUpdate.setContratos(objDTO.getContratos());
         return repository.save(vendedorUpdate);
     }
 

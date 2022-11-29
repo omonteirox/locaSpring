@@ -1,6 +1,7 @@
 package ifgoiano.FGSeguradora.models;
 
 
+import ifgoiano.FGSeguradora.enums.Genero;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,10 +31,11 @@ public class Vendedor extends Pessoa{
     private Double salario;
 
 
-    private String contratos;
+    @OneToMany(mappedBy = "id")
+    private List<Contrato> contratos;
 
     public Vendedor(Long id, String nome, @CPF String cpf, LocalDate dataNascimento, String login,
-                   String senha, String genero, String endereco, Double salario, String contratos) {
+                    String senha, Genero genero, String endereco, Double salario, List<Contrato> contratos) {
         super( nome, cpf, dataNascimento, genero, endereco);
         this.id=id;
         this.login = login;
