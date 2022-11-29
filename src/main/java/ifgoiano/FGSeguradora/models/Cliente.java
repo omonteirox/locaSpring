@@ -22,14 +22,14 @@ public class Cliente extends Pessoa{
     private Long id;
 
 
-    @OneToMany
-    private List<Moto> motos;
-    @OneToMany
-    private List<Carro> carros;
-    @OneToMany
-    private List<Caminhonete> caminhonetes;
-@OneToMany
-    private List<Seguro> seguros;
+    //@OneToMany
+    private String motos;
+    //@OneToMany
+    private String carros;
+    //@OneToMany
+    private String caminhonetes;
+    //@OneToMany
+    private String seguros;
 
     public Cliente(String nome, @CPF String cpf, LocalDate dataNascimento, Genero genero, String endereco, Long id) {
         super(nome, cpf, dataNascimento, genero, endereco);
