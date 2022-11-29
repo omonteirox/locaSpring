@@ -19,8 +19,11 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/cliente")
 public class ClienteController {
-    @Autowired
-    public ClienteService service;
+    public final ClienteService service;
+
+    public ClienteController(ClienteService service) {
+        this.service = service;
+    }
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<ClienteDTO> findById(@PathVariable Long id) {
