@@ -3,13 +3,11 @@ package ifgoiano.FGSeguradora.DTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import ifgoiano.FGSeguradora.enums.Genero;
 import ifgoiano.FGSeguradora.models.Vendedor;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.br.CPF;
-import org.springframework.hateoas.RepresentationModel;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -18,12 +16,10 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.List;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class VendedorDTO extends RepresentationModel<VendedorDTO> implements Serializable {
+public class VendedorCreateDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
 
@@ -58,7 +54,7 @@ public class VendedorDTO extends RepresentationModel<VendedorDTO> implements Ser
 
     // private List<Contrato> contratos;
 
-    public VendedorDTO(Vendedor vendedor) {
+    public VendedorCreateDTO(Vendedor vendedor) {
         this.id = vendedor.getId();
         this.nome = vendedor.getNome();
         this.cpf = vendedor.getCpf();
@@ -71,16 +67,4 @@ public class VendedorDTO extends RepresentationModel<VendedorDTO> implements Ser
         //this.contratos = vendedor.getContratos();
     }
 
-    public VendedorDTO(VendedorCreateDTO vendedor) {
-        this.id = vendedor.getId();
-        this.nome = vendedor.getNome();
-        this.cpf = vendedor.getCpf();
-        this.dataNascimento = vendedor.getDataNascimento();
-        this.login = vendedor.getLogin();
-        this.senha = vendedor.getSenha();
-        this.genero = vendedor.getGenero();
-        this.endereco = vendedor.getEndereco();
-        this.salario = vendedor.getSalario();
-        //this.contratos = vendedor.getContratos();
-    }
 }

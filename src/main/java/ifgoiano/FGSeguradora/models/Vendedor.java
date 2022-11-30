@@ -43,5 +43,13 @@ public class Vendedor extends Pessoa{
         this.salario = salario;
         this.contratos= contratos;
     }
+    public Vendedor(Long id, String nome, @CPF String cpf, LocalDate dataNascimento, String login,
+                    String senha, Genero genero, String endereco, Double salario) {
+        super( nome, cpf, dataNascimento, genero, endereco);
+        this.id=id;
+        this.login = login;
+        this.senha = senha;
+        this.salario = salario;
+    }
 
 }
