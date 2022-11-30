@@ -5,6 +5,8 @@ import ifgoiano.FGSeguradora.DTO.VendedorCreateDTO;
 import ifgoiano.FGSeguradora.DTO.VendedorDTO;
 import ifgoiano.FGSeguradora.models.Vendedor;
 import ifgoiano.FGSeguradora.service.VendedorService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,11 +22,13 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @RequestMapping(value = "/vendedor")
+@Api(tags = "Vendedor",description = "Tudo sobre Vendedor")
 public class VendedorController {
 
     @Autowired
     private VendedorService service;
 
+    @ApiOperation(value = "Consultar todos os vendedores")
     @GetMapping
     public ResponseEntity<List<VendedorDTO>> findAll() {
 
@@ -35,13 +39,20 @@ public class VendedorController {
                 findById(p.getId())).withRel("Acessar o vendedor e contratos vinculados: ")));
         return ResponseEntity.ok().body(objDTO);
     }
-
+    @ApiOperation(value = "Consultar o Vendedor")
     @GetMapping("/{id}")
     public ResponseEntity<Vendedor> findById(@PathVariable Long id) {
         Vendedor obj = service.findById(id);
         return ResponseEntity.ok().body(obj);
     }
+    @ApiOperation(value = "Atualizar um Vendedor")
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<VendedorDTO> update(@PathVariable Long id, @Valid @RequestBody VendedorCreateDTO objDTO) {
+        VendedorDTO newObj = new VendedorDTO(service.update(id, objDTO));
+        return ResponseEntity.ok().body(newObj);
 
+    }
+    @ApiOperation(value = "Criar um vendedor")
     @PostMapping
     public ResponseEntity<VendedorDTO> create(@Valid @RequestBody VendedorCreateDTO objDTO) {
         Vendedor newObj = service.create(objDTO);
@@ -49,14 +60,7 @@ public class VendedorController {
                 .fromCurrentRequest().path("/{id}").buildAndExpand(newObj.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
-
-    @PutMapping(value = "/{id}")
-    public ResponseEntity<VendedorDTO> update(@PathVariable Long id, @Valid @RequestBody VendedorCreateDTO objDTO) {
-        VendedorDTO newObj = new VendedorDTO(service.update(id, objDTO));
-        return ResponseEntity.ok().body(newObj);
-
-    }
-
+    @ApiOperation(value = "deletar um Vendedor")
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.delete(id);
