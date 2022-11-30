@@ -4,6 +4,8 @@ import ifgoiano.FGSeguradora.DTO.ContratoDTO;
 import ifgoiano.FGSeguradora.DTO.GerenteDTO;
 import ifgoiano.FGSeguradora.models.Contrato;
 import ifgoiano.FGSeguradora.service.ContratoService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.hateoas.Link;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/contrato")
+@Api(tags = "Contrato",description = "Tudo sobre Contrato")
 public class ContratoController {
     public final ContratoService service;
 
@@ -26,12 +29,14 @@ public class ContratoController {
     }
 
     @GetMapping(value = "/{id}")
+    @ApiOperation(value = "Consultar Contrato")
     public ResponseEntity<ContratoDTO> findById(@PathVariable Long id) {
         ContratoDTO objDTO = new ContratoDTO(service.findById(id));
         return ResponseEntity.ok().body(objDTO);
     }
 
     @PostMapping
+    @ApiOperation(value = "Criar Contrato")
     public ResponseEntity<ContratoDTO> create(@Valid @RequestBody ContratoDTO objDTO) {
         Contrato newObj = service.create(objDTO);
         URI uri = ServletUriComponentsBuilder
@@ -40,6 +45,7 @@ public class ContratoController {
     }
 
     @GetMapping
+    @ApiOperation(value = "Listar todos Contratos")
     public ResponseEntity<List<ContratoDTO>> findAll() {
         List<ContratoDTO> listDTO = service.findAll()
                 .stream().map(obj -> new ContratoDTO(obj)).collect(Collectors.toList());
@@ -47,6 +53,7 @@ public class ContratoController {
     }
 
     @PutMapping(value = "/{id}")
+    @ApiOperation(value = "Atualizar Contrato")
     public ResponseEntity<ContratoDTO> update(@PathVariable Long id, @Valid @RequestBody ContratoDTO objDTO) {
         ContratoDTO newObj = new ContratoDTO(service.update(id, objDTO));
         return ResponseEntity.ok().body(newObj);
@@ -54,6 +61,7 @@ public class ContratoController {
     }
 
     @DeleteMapping(value = "/{id}")
+    @ApiOperation(value = "Deletar Contrato")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
