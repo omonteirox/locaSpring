@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Contrato extends RepresentationModel<Contrato> {
+public class Contrato  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -1,6 +1,7 @@
 package ifgoiano.FGSeguradora.controller;
 
 import ifgoiano.FGSeguradora.DTO.ContratoDTO;
+import ifgoiano.FGSeguradora.DTO.GerenteDTO;
 import ifgoiano.FGSeguradora.models.Contrato;
 import ifgoiano.FGSeguradora.service.ContratoService;
 import org.springframework.hateoas.Link;
@@ -12,11 +13,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @RequestMapping("/contrato")
@@ -27,15 +25,10 @@ public class ContratoController {
         this.service = service;
     }
 
-
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Contrato> findById(@PathVariable Long id) {
-        Contrato contratoO = service.findById(id);
-       contratoO.add(linkTo(methodOn(ContratoController.class).findAll()).withRel("Olhar todos os contratos"));
-
-//        ContratoDTO objDTO = new ContratoDTO(service.findById(id));
-//        return ResponseEntity.ok().body(objDTO);
-        return ResponseEntity.ok().body(contratoO);
+    public ResponseEntity<ContratoDTO> findById(@PathVariable Long id) {
+        ContratoDTO objDTO = new ContratoDTO(service.findById(id));
+        return ResponseEntity.ok().body(objDTO);
     }
 
     @PostMapping
@@ -47,15 +40,11 @@ public class ContratoController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Contrato>> findAll() {
-        List<Contrato> contratosList = service.findAll();
-        if (contratosList.isEmpty()){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } else {
-            contratosList.stream().forEach(p-> p.add(linkTo(methodOn(ContratoController.class).findById(p.getId())).withRel("Acessar no contrato:")));
-            }
-            return new ResponseEntity<List<Contrato>>(contratosList,HttpStatus.OK);
-        }
+    public ResponseEntity<List<ContratoDTO>> findAll() {
+        List<ContratoDTO> listDTO = service.findAll()
+                .stream().map(obj -> new ContratoDTO(obj)).collect(Collectors.toList());
+        return ResponseEntity.ok().body(listDTO);
+    }
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<ContratoDTO> update(@PathVariable Long id, @Valid @RequestBody ContratoDTO objDTO) {

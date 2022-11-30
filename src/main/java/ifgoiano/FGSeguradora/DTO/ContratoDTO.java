@@ -1,22 +1,18 @@
 package ifgoiano.FGSeguradora.DTO;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import ifgoiano.FGSeguradora.models.Cliente;
 import ifgoiano.FGSeguradora.models.Contrato;
-import ifgoiano.FGSeguradora.models.Vendedor;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.hateoas.RepresentationModel;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ContratoDTO extends RepresentationModel<ContratoDTO> implements Serializable {
+public class ContratoDTO implements Serializable {
     private static final long serialVersionUID = 1l;
     private Long id;
 

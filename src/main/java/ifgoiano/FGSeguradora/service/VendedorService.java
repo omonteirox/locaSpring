@@ -1,5 +1,6 @@
 package ifgoiano.FGSeguradora.service;
 
+import ifgoiano.FGSeguradora.DTO.VendedorCreateDTO;
 import ifgoiano.FGSeguradora.DTO.VendedorDTO;
 import ifgoiano.FGSeguradora.exception.DataIntegratyViolationException;
 import ifgoiano.FGSeguradora.exception.ObjectNotFoundException;
@@ -28,8 +29,9 @@ public class VendedorService {
         id + ", Tipo: " + Vendedor.class.getName()));
     }
 
-    public Vendedor create(@Valid VendedorDTO objDTO){
-        if(findByCPF(objDTO) !=null){
+    public Vendedor create(@Valid VendedorCreateDTO objDTO){
+        VendedorDTO newObjDTO = new VendedorDTO(objDTO);
+        if(findByCPF(newObjDTO) !=null){
             throw new DataIntegratyViolationException("CPF já cadastrado na base de dados!");
         }
         return repository.save(new Vendedor(null,
@@ -40,13 +42,13 @@ public class VendedorService {
                 objDTO.getSenha(),
                 objDTO.getGenero(),
                 objDTO.getEndereco(),
-                objDTO.getSalario(),
-                null
+                objDTO.getSalario()
         ));
     }
-    public Vendedor update(Long id, VendedorDTO objDTO) {
+    public Vendedor update(Long id, VendedorCreateDTO objDTO) {
         Vendedor vendedorUpdate = findById(id);
-        if(findByCPF(objDTO) !=null && findByCPF(objDTO).getId() != id){
+        VendedorDTO newObjDTO = new VendedorDTO(objDTO);
+        if(findByCPF(newObjDTO) !=null && findByCPF(newObjDTO).getId() != id){
             throw new DataIntegratyViolationException("CPF já cadastrado na base de dados!");
         }
         vendedorUpdate.setNome(objDTO.getNome());
