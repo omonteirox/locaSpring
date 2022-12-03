@@ -17,22 +17,21 @@ public class SeguroService {
 
     private final ContratoService contratoService;
     private final ClienteService clienteService;
+    private final GerenteService gerenteService;
 //    private final AutomovelService automovelService;
 //    private final SinistroService  sinistroService;
 
-    public SeguroService(SeguroRepository repository,ContratoService contratoService,ClienteService clienteService) {
+    public SeguroService(SeguroRepository repository,ContratoService contratoService,ClienteService clienteService, GerenteService gerenteService) {
         this.repository = repository;
         this.contratoService = contratoService;
         this.clienteService=clienteService;
-    }
-
-    public List<Seguro> findAll() {
-        return repository.findAll();
+        this.gerenteService=gerenteService;
     }
 
     public Seguro create(@Valid SeguroDTO objDTO) {
         clienteService.findById(objDTO.getClienteID());
         contratoService.findById(objDTO.getContratoID());
+        gerenteService.findById(objDTO.getGerenteID());
         return repository.save(new Seguro(null,
                 objDTO.getDataInicio(),
                 objDTO.getDataFim(),
@@ -40,7 +39,8 @@ public class SeguroService {
                 objDTO.getContratoID(),
                 objDTO.getClienteID(),
                 objDTO.getSinitroID(),
-                objDTO.getAutomovelID()
+                objDTO.getAutomovelID(),
+                objDTO.getGerenteID()
         ));
     }
 
@@ -59,6 +59,7 @@ public class SeguroService {
         newObj.setClienteID(objDTO.getClienteID());
         newObj.setSinitroID(objDTO.getSinitroID());
         newObj.setAutomovelID(objDTO.getAutomovelID());
+        newObj.setGerenteID(objDTO.getGerenteID());
         return repository.save(newObj);
     }
 

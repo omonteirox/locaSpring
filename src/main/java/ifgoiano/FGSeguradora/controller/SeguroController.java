@@ -37,19 +37,11 @@ public class SeguroController {
                 .fromCurrentRequest().path("/{id}").buildAndExpand(newObj.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
-    @ApiOperation(value = "Listar todos os Seguros")
-    @GetMapping
-    public ResponseEntity<List<SeguroDTO>> findAll() {
-        List<SeguroDTO> listDTO = service.findAll()
-                .stream().map(obj -> new SeguroDTO(obj)).collect(Collectors.toList());
-        return ResponseEntity.ok().body(listDTO);
-    }
     @ApiOperation(value = "Atualizar Seguro")
     @PutMapping(value = "/{id}")
     public ResponseEntity<SeguroDTO> update(@PathVariable Long id, @Valid @RequestBody SeguroDTO objDTO) {
         SeguroDTO newObj = new SeguroDTO(service.update(id, objDTO));
         return ResponseEntity.ok().body(newObj);
-
     }
     @ApiOperation(value = "Deletar Seguro")
     @DeleteMapping(value = "/{id}")

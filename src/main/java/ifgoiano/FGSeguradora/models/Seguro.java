@@ -23,9 +23,10 @@ public class Seguro {
     private Long clienteID;
     private Long sinitroID;
     private Long automovelID;
+    private Long gerenteID;
 
     public Seguro(Long id, LocalDateTime dataInicio, LocalDateTime dataFim, String apolice,
-                  Long contrato, Long cliente, Long sinitro, Long automovel) {
+                  Long contrato, Long cliente, Long sinitro, Long automovel, Long gerenteID) {
         this.id = id;
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
@@ -34,5 +35,6 @@ public class Seguro {
         this.clienteID = cliente;
         this.sinitroID = sinitro;
         this.automovelID = automovel;
+        this.gerenteID = gerenteID;
     }
 }
