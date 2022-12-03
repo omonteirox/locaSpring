@@ -1,5 +1,6 @@
 package ifgoiano.FGSeguradora.DTO;
 
+import ifgoiano.FGSeguradora.models.Servico;
 import ifgoiano.FGSeguradora.models.Terceirizado;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotEmpty;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -29,15 +31,24 @@ public class TerceirizadoDTO {
     private String cnpj;
 
     //@ManyToMany
-    private String servico;
+    private List<ServicoDTO> servicos;
 
     public TerceirizadoDTO(Terceirizado terceirizado) {
         this.id = terceirizado.getId();
         this.razaoSocial = terceirizado.getRazaoSocial();
         this.telefone = terceirizado.getTelefone();
         this.cnpj = terceirizado.getCnpj();
-        this.servico=terceirizado.getServico();
+       // this.servico=terceirizado.getServico();
     }
+
+    public List<ServicoDTO> getServicos() {
+        return servicos;
+    }
+
+    public void setServicos(List<ServicoDTO> servicos) {
+        this.servicos = servicos;
+    }
+
 
 }
 
