@@ -14,36 +14,25 @@ public class Seguro {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private LocalDateTime dataInicio;
-
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private LocalDateTime dataFim;
-
-
     private String apolice;
-
-    //@OneToOne
-    private String contrato;
-
-    //@OneToOne
-    private String cliente;
-
-    //@OneToOne
-    private String sinitro;
-//    @OneToOne
-    private String automovel;
+    private Long contratoID;
+    private Long clienteID;
+    private Long sinitroID;
+    private Long automovelID;
 
     public Seguro(Long id, LocalDateTime dataInicio, LocalDateTime dataFim, String apolice,
-                  String contrato, String cliente, String sinitro, String automovel) {
+                  Long contrato, Long cliente, Long sinitro, Long automovel) {
         this.id = id;
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
         this.apolice = apolice;
-        this.contrato = contrato;
-        this.cliente = cliente;
-        this.sinitro = sinitro;
-        this.automovel = automovel;
+        this.contratoID = contrato;
+        this.clienteID = cliente;
+        this.sinitroID = sinitro;
+        this.automovelID = automovel;
     }
 }

@@ -5,9 +5,11 @@ import ifgoiano.FGSeguradora.models.Seguro;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.Range;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -31,25 +33,33 @@ public class SeguroDTO implements Serializable {
     private String apolice;
 
     //@OneToOne
-    private String contrato;
+    @NotNull(message = "O ID do contrato é obrigatório!")
+    @Range(min = 1, max = 100000)
+    private Long contratoID;
 
     //@OneToOne
-    private String cliente;
+    @NotNull(message = "O ID do cliente é obrigatório!")
+    @Range(min = 1, max = 100000)
+    private Long clienteID;
 
     //@OneToOne
-    private String sinitro;
+    @NotNull(message = "O ID do sinistro é obrigatório!")
+    @Range(min = 1, max = 100000)
+    private Long sinitroID;
     //    @OneToOne
-    private String automovel;
+    @NotNull(message = "O ID do automóvel é obrigatório!")
+    @Range(min = 1, max = 100000)
+    private Long automovelID;
 
     public SeguroDTO(Seguro seguro) {
         this.id = seguro.getId();
         this.dataInicio = seguro.getDataInicio();
         this.dataFim = seguro.getDataFim();
         this.apolice = seguro.getApolice();
-        this.contrato = seguro.getContrato();
-        this.cliente = seguro.getCliente();
-        this.sinitro = seguro.getSinitro();
-        this.automovel = seguro.getAutomovel();
+        this.contratoID = seguro.getContratoID();
+        this.clienteID = seguro.getClienteID();
+        this.sinitroID = seguro.getSinitroID();
+        this.automovelID = seguro.getAutomovelID();
     }
 
 
