@@ -49,11 +49,8 @@ public class ServicoController {
     }
 
     @GetMapping("/findAll")
-
     public List<Servico> findAll() {
-
         return repository.findAll();
-
     }
 
     @PutMapping("/atualizar/{id}")

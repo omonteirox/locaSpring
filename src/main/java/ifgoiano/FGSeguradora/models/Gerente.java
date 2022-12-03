@@ -9,6 +9,7 @@ import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Data
@@ -26,18 +27,13 @@ public class Gerente extends Pessoa {
     @Column(nullable = false)
     private String senha;
 
-    //@OneToMany
-    private String seguros;
+    @OneToMany(mappedBy = "id")
+    private List<Seguro> seguros;
 
-
-    public Gerente(Long id, String nome, @CPF String cpf, LocalDate dataNascimento, String login,
-                   String senha, Genero genero, String endereco, String seguros) {
+    public Gerente(Long id, String nome, @CPF String cpf, LocalDate dataNascimento, Genero genero, String endereco, String login, String senha) {
         super(nome, cpf, dataNascimento, genero, endereco);
-        this.id= id;
+        this.id = id;
         this.login = login;
         this.senha = senha;
-        this.seguros= seguros;
     }
-
-
 }

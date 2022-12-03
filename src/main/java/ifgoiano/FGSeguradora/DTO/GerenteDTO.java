@@ -4,6 +4,7 @@ package ifgoiano.FGSeguradora.DTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import ifgoiano.FGSeguradora.enums.Genero;
 import ifgoiano.FGSeguradora.models.Gerente;
+import ifgoiano.FGSeguradora.models.Seguro;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,6 +18,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -46,7 +48,7 @@ public class GerenteDTO implements Serializable {
     @Length(min = 3, max = 100, message = "O campo ENDERECO deve possuir entre 3 á 100 caracteres.")
     private String endereco;
 
-    private String seguros;
+    private List<Seguro> seguros;
 
 
     public GerenteDTO(Gerente gerente) {
@@ -125,11 +127,11 @@ public class GerenteDTO implements Serializable {
         this.endereco = endereco;
     }
 
-    public String getSeguros() {
+    public List<Seguro> getSeguros() {
         return seguros;
     }
 
-    public void setSeguros(String seguros) {
+    public void setSeguros(List<Seguro> seguros) {
         this.seguros = seguros;
     }
 }

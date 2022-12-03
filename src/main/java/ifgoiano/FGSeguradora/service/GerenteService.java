@@ -32,11 +32,11 @@ public class GerenteService {
                 objDTO.getNome(),
                 objDTO.getCpf(),
                 objDTO.getDataNascimento(),
-                objDTO.getLogin(),
-                objDTO.getSenha(),
                 objDTO.getGenero(),
                 objDTO.getEndereco(),
-                objDTO.getSeguros()
+                objDTO.getLogin(),
+                objDTO.getSenha()
+
              ));
     }
     public Gerente findById(Long id) {
@@ -57,7 +57,6 @@ public class GerenteService {
         gerenteUpdate.setSenha(objDTO.getSenha());
         gerenteUpdate.setGenero(objDTO.getGenero());
         gerenteUpdate.setEndereco(objDTO.getEndereco());
-        gerenteUpdate.setSeguros(objDTO.getSeguros());
         return repository.save(gerenteUpdate);
     }
 

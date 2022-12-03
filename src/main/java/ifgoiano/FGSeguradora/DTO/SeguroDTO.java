@@ -51,6 +51,10 @@ public class SeguroDTO implements Serializable {
     @Range(min = 1, max = 100000)
     private Long automovelID;
 
+    @NotNull(message = "O ID do Gerente é obrigatório!")
+    @Range(min = 1, max = 100000)
+    private Long gerenteID;
+
     public SeguroDTO(Seguro seguro) {
         this.id = seguro.getId();
         this.dataInicio = seguro.getDataInicio();
@@ -60,6 +64,7 @@ public class SeguroDTO implements Serializable {
         this.clienteID = seguro.getClienteID();
         this.sinitroID = seguro.getSinitroID();
         this.automovelID = seguro.getAutomovelID();
+        this.gerenteID = seguro.getGerenteID();
     }
 
 
