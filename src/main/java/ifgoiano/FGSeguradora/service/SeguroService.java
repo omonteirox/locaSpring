@@ -15,8 +15,15 @@ public class SeguroService {
 
     private final SeguroRepository repository;
 
-    public SeguroService(SeguroRepository repository) {
+    private final ContratoService contratoService;
+    private final ClienteService clienteService;
+//    private final AutomovelService automovelService;
+//    private final SinistroService  sinistroService;
+
+    public SeguroService(SeguroRepository repository,ContratoService contratoService,ClienteService clienteService) {
         this.repository = repository;
+        this.contratoService = contratoService;
+        this.clienteService=clienteService;
     }
 
     public List<Seguro> findAll() {
@@ -24,15 +31,16 @@ public class SeguroService {
     }
 
     public Seguro create(@Valid SeguroDTO objDTO) {
-
+        clienteService.findById(objDTO.getClienteID());
+        contratoService.findById(objDTO.getContratoID());
         return repository.save(new Seguro(null,
                 objDTO.getDataInicio(),
                 objDTO.getDataFim(),
                 objDTO.getApolice(),
-                objDTO.getContrato(),
-                objDTO.getCliente(),
-                objDTO.getSinitro(),
-                objDTO.getAutomovel()
+                objDTO.getContratoID(),
+                objDTO.getClienteID(),
+                objDTO.getSinitroID(),
+                objDTO.getAutomovelID()
         ));
     }
 
@@ -47,10 +55,10 @@ public class SeguroService {
         newObj.setDataInicio(objDTO.getDataInicio());
         newObj.setDataFim(objDTO.getDataFim());
         newObj.setApolice(objDTO.getApolice());
-        newObj.setContrato(objDTO.getContrato());
-        newObj.setCliente(objDTO.getCliente());
-        newObj.setSinitro(objDTO.getSinitro());
-        newObj.setAutomovel(objDTO.getAutomovel());
+        newObj.setContratoID(objDTO.getContratoID());
+        newObj.setClienteID(objDTO.getClienteID());
+        newObj.setSinitroID(objDTO.getSinitroID());
+        newObj.setAutomovelID(objDTO.getAutomovelID());
         return repository.save(newObj);
     }
 
