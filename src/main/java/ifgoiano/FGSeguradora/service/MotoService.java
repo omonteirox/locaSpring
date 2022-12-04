@@ -90,5 +90,9 @@ public class MotoService {
         }
         return null;
     }
-
+    public Automovel verificaSeExiste(Long id) throws ObjectNotFoundException {
+        Automovel automovel = repository.findById(id)
+                .orElseThrow(() -> new ObjectNotFoundException(id));
+        return automovel;
+    }
 }

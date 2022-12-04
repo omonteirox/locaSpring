@@ -1,7 +1,6 @@
 package ifgoiano.FGSeguradora.repository;
 
 import ifgoiano.FGSeguradora.models.Cliente;
-import ifgoiano.FGSeguradora.models.Gerente;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

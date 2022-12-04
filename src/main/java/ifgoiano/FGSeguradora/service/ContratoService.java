@@ -1,14 +1,9 @@
 package ifgoiano.FGSeguradora.service;
 
 import ifgoiano.FGSeguradora.DTO.ContratoDTO;
-import ifgoiano.FGSeguradora.exception.DataIntegratyViolationException;
 import ifgoiano.FGSeguradora.exception.ObjectNotFoundException;
-import ifgoiano.FGSeguradora.models.Cliente;
 import ifgoiano.FGSeguradora.models.Contrato;
-import ifgoiano.FGSeguradora.models.Vendedor;
-import ifgoiano.FGSeguradora.repository.ClienteRepository;
 import ifgoiano.FGSeguradora.repository.ContratoRepository;
-import ifgoiano.FGSeguradora.repository.VendedorRepository;
 import org.springframework.stereotype.Service;
 
 import javax.validation.Valid;

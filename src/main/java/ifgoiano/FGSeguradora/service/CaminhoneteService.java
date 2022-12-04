@@ -4,7 +4,6 @@ import ifgoiano.FGSeguradora.DTO.CaminhoneteDTO;
 import ifgoiano.FGSeguradora.exception.DataIntegratyViolationException;
 import ifgoiano.FGSeguradora.exception.ObjectNotFoundException;
 import ifgoiano.FGSeguradora.models.Automovel;
-import ifgoiano.FGSeguradora.models.Cliente;
 import ifgoiano.FGSeguradora.repository.AutomovelRepository;
 import org.springframework.stereotype.Service;
 
@@ -93,6 +92,11 @@ public class CaminhoneteService {
             return obj;
         }
         return null;
+    }
+    public Automovel verificaSeExiste(Long id) throws ObjectNotFoundException {
+        Automovel automovel = repository.findById(id)
+                .orElseThrow(() -> new ObjectNotFoundException(id));
+        return automovel;
     }
 
 }

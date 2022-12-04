@@ -1,13 +1,12 @@
 package ifgoiano.FGSeguradora.service;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import ifgoiano.FGSeguradora.DTO.*;
+import ifgoiano.FGSeguradora.DTO.MensagemRespostaDTO;
+import ifgoiano.FGSeguradora.DTO.TerceirizadoCreateDTO;
+import ifgoiano.FGSeguradora.DTO.TerceirizadoDTO;
 import ifgoiano.FGSeguradora.exception.DataIntegratyViolationException;
 import ifgoiano.FGSeguradora.exception.ObjectNotFoundException;
 import ifgoiano.FGSeguradora.mapper.ServicoMapper;
 import ifgoiano.FGSeguradora.mapper.TerceirizadoMapper;
-import ifgoiano.FGSeguradora.models.Gerente;
-import ifgoiano.FGSeguradora.models.Servico;
 import ifgoiano.FGSeguradora.models.Terceirizado;
 import ifgoiano.FGSeguradora.repository.TerceirizadoRepository;
 import org.springframework.stereotype.Service;
@@ -15,7 +14,6 @@ import org.springframework.stereotype.Service;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 
 @Service
