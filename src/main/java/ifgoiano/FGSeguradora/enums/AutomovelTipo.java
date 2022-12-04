@@ -4,8 +4,11 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public enum AutomovelTipo {
+    //1
     CARRO("Carro"),
-    CAMINHAO("Caminhao"),
+    // 2
+    CAMINHONETE("Caminhonete"),
+    // 3
     MOTO("Moto");
     private final String descricao;
 }
