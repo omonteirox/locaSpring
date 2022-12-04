@@ -51,7 +51,7 @@ public class ServicoService {
         servicoCreate.getTerceirizados();
         repository.save(servicoCreate);
         return MensagemRespostaDTO.builder()
-                .mensagem("Seriço com id " + obj.getId() + " criado." )
+                .mensagem("Seriço criado." )
                 .build();
     }
     public ServicoDTO findById(Long id) {
