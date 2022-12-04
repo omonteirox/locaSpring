@@ -1,6 +1,26 @@
+CREATE TABLE IF NOT EXISTS "automovel"
+(
+    "id"                serial           NOT NULL ,
+    "ano"               INTEGER          NULL DEFAULT NULL,
+    "carroceria_dupla"  BOOLEAN          NOT NULL,
+    "categoria"         VARCHAR(255)     NULL DEFAULT NULL,
+    "cavalos_potencia"  DOUBLE PRECISION NOT NULL,
+    "chassi"            VARCHAR(255)     NULL DEFAULT NULL,
+    "cilindrada"        DOUBLE PRECISION NULL DEFAULT NULL,
+    "cor"               VARCHAR(255)     NULL DEFAULT NULL,
+    "marca"             VARCHAR(255)     NULL DEFAULT NULL,
+    "modelo"            VARCHAR(255)     NULL DEFAULT NULL,
+    "placa"             VARCHAR(255)     NULL DEFAULT NULL,
+    "quantidade_portas" INTEGER          NULL DEFAULT NULL,
+    "quatro_por_quatro" BOOLEAN          NOT NULL,
+    "tipo_automovel"    INTEGER          NULL DEFAULT NULL,
+    "valor_fipe"        DOUBLE PRECISION NULL DEFAULT NULL,
+    PRIMARY KEY ("id")
+)
+;
 CREATE TABLE IF NOT EXISTS "caminhonete"
 (
-    "id"                BIGINT           NOT NULL,
+    "id"                serial           NOT NULL,
     "ano"               INTEGER          NULL DEFAULT NULL,
     "chassi"            VARCHAR(255)     NULL DEFAULT NULL,
     "cor"               VARCHAR(255)     NULL DEFAULT NULL,
@@ -16,7 +36,7 @@ CREATE TABLE IF NOT EXISTS "caminhonete"
 ;
 CREATE TABLE IF NOT EXISTS "carro"
 (
-    "id"                BIGINT           NOT NULL,
+    "id"                serial           NOT NULL,
     "ano"               INTEGER          NULL DEFAULT NULL,
     "chassi"            VARCHAR(255)     NULL DEFAULT NULL,
     "cor"               VARCHAR(255)     NULL DEFAULT NULL,
@@ -31,7 +51,7 @@ CREATE TABLE IF NOT EXISTS "carro"
 ;
 CREATE TABLE IF NOT EXISTS "cliente"
 (
-    "id"              BIGINT       NOT NULL,
+    "id"              serial       NOT NULL,
     "cpf"             VARCHAR(255) NULL DEFAULT NULL,
     "data_nascimento" DATE         NULL DEFAULT NULL,
     "endereco"        VARCHAR(255) NULL DEFAULT NULL,
@@ -46,7 +66,7 @@ CREATE TABLE IF NOT EXISTS "cliente"
 ;
 CREATE TABLE IF NOT EXISTS "contrato"
 (
-    "id"            BIGINT       NOT NULL,
+    "id"            serial       NOT NULL,
     "clienteid"     BIGINT       NOT NULL,
     "data_validade" DATE         NULL DEFAULT NULL,
     "descricao"     VARCHAR(255) NOT NULL,
@@ -57,7 +77,7 @@ CREATE TABLE IF NOT EXISTS "contrato"
 ;
 CREATE TABLE IF NOT EXISTS "gerente"
 (
-    "id"              BIGINT       NOT NULL,
+    "id"              serial       NOT NULL,
     "cpf"             VARCHAR(255) NULL DEFAULT NULL,
     "data_nascimento" DATE         NULL DEFAULT NULL,
     "endereco"        VARCHAR(255) NULL DEFAULT NULL,
@@ -71,7 +91,7 @@ CREATE TABLE IF NOT EXISTS "gerente"
 ;
 CREATE TABLE IF NOT EXISTS "moto"
 (
-    "id"         BIGINT           NOT NULL,
+    "id"         serial           NOT NULL,
     "ano"        INTEGER          NULL DEFAULT NULL,
     "chassi"     VARCHAR(255)     NULL DEFAULT NULL,
     "cor"        VARCHAR(255)     NULL DEFAULT NULL,
@@ -86,7 +106,7 @@ CREATE TABLE IF NOT EXISTS "moto"
 ;
 CREATE TABLE IF NOT EXISTS "seguro"
 (
-    "id"          BIGINT       NOT NULL,
+    "id"          serial       NOT NULL,
     "apolice"     VARCHAR(255) NULL DEFAULT NULL,
     "automovel"   VARCHAR(255) NULL DEFAULT NULL,
     "cliente"     VARCHAR(255) NULL DEFAULT NULL,
@@ -104,7 +124,7 @@ CREATE TABLE IF NOT EXISTS "seguro"
 ;
 CREATE TABLE IF NOT EXISTS "servico"
 (
-    "id"                    BIGINT           NOT NULL,
+    "id"                    serial           NOT NULL,
     "data_servico_prestado" DATE             NULL DEFAULT NULL,
     "descricao"             VARCHAR(255)     NOT NULL,
     "seguro"                VARCHAR(255)     NULL DEFAULT NULL,
@@ -114,7 +134,7 @@ CREATE TABLE IF NOT EXISTS "servico"
 ;
 CREATE TABLE IF NOT EXISTS "sinistro"
 (
-    "id"            BIGINT       NOT NULL,
+    "id"            serial       NOT NULL,
     "descricao"     VARCHAR(255) NOT NULL,
     "perda_parcial" BOOLEAN      NULL DEFAULT NULL,
     "perda_total"   BOOLEAN      NULL DEFAULT NULL,
@@ -129,7 +149,7 @@ CREATE TABLE IF NOT EXISTS "sinistro"
 ;
 CREATE TABLE IF NOT EXISTS "terceirizado"
 (
-    "id"           BIGINT       NOT NULL,
+    "id"           serial       NOT NULL,
     "cnpj"         VARCHAR(255) NOT NULL,
     "razao_social" VARCHAR(255) NOT NULL,
     "servico"      VARCHAR(255) NULL DEFAULT NULL,
@@ -139,7 +159,7 @@ CREATE TABLE IF NOT EXISTS "terceirizado"
 ;
 CREATE TABLE IF NOT EXISTS "vendedor"
 (
-    "id"              BIGINT           NOT NULL,
+    "id"              serial           NOT NULL,
     "cpf"             VARCHAR(255)     NULL DEFAULT NULL,
     "data_nascimento" DATE             NULL DEFAULT NULL,
     "endereco"        VARCHAR(255)     NULL DEFAULT NULL,

@@ -114,5 +114,4 @@ public class ClienteService {
                 .orElseThrow(() -> new ObjectNotFoundException(id));
         return cliente;
     }
-
 }
