@@ -18,13 +18,17 @@ import java.util.Optional;
 @Service
 public class ClienteService {
     private final ClienteRepository repository;
-    private final AutomovelService automovelService;
+    private final CarroService carroService;
+    private final MotoService motoService;
+    private final CaminhoneteService caminhoneteService;
     private final ClienteMapper clienteMapper;
 
     public ClienteService(ClienteRepository repository,
-                          AutomovelService automovelService,  ClienteMapper clienteMapper) {
+                          CarroService carroService, MotoService motoService, CaminhoneteService caminhoneteService, ClienteMapper clienteMapper) {
         this.repository = repository;
-        this.automovelService = automovelService;
+        this.carroService = carroService;
+        this.motoService = motoService;
+        this.caminhoneteService = caminhoneteService;
         this.clienteMapper = clienteMapper;
     }
 
@@ -43,7 +47,9 @@ public class ClienteService {
         }
         List<Automovel> automovelList = new ArrayList<>();
         for(Long id: objDTO.getAutomoveis_id()) {
-            automovelList.add(automovelService.verificaSeExiste(id));
+            automovelList.add(carroService.verificaSeExiste(id));
+            automovelList.add(motoService.verificaSeExiste(id));
+            automovelList.add(caminhoneteService.verificaSeExiste(id));
         }
         Cliente clientecreate = clienteMapper.toClienteCreate(objDTO);
         clientecreate.setNome(objDTO.getNome());
@@ -71,7 +77,9 @@ public class ClienteService {
         }
         List<Automovel> automovelList = new ArrayList<>();
         for(Long id_automovel: objDTO.getAutomoveis_id()) {
-            automovelList.add(automovelService.verificaSeExiste(id_automovel));
+            automovelList.add(carroService.verificaSeExiste(id));
+            automovelList.add(motoService.verificaSeExiste(id));
+            automovelList.add(caminhoneteService.verificaSeExiste(id));
         }
         Cliente clientecreate = clienteMapper.toClienteCreate(objDTO);
         clientecreate.setNome(objDTO.getNome());
