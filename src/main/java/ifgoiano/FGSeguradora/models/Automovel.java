@@ -42,7 +42,6 @@ public class Automovel {
     private boolean quatroPorQuatro;
 
     private Integer quantidadePortas;
-
     private String categoria;
 
     private Double cilindrada;
