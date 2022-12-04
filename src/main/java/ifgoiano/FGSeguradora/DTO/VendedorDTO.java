@@ -18,7 +18,6 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -56,8 +55,6 @@ public class VendedorDTO extends RepresentationModel<VendedorDTO> implements Ser
     @Range(min = 30, max = 100000, message = "A quantidade mínima 30 reais a máxima 100.000 reais")
     private Double salario;
 
-    // private List<Contrato> contratos;
-
     public VendedorDTO(Vendedor vendedor) {
         this.id = vendedor.getId();
         this.nome = vendedor.getNome();
@@ -68,11 +65,9 @@ public class VendedorDTO extends RepresentationModel<VendedorDTO> implements Ser
         this.genero = vendedor.getGenero();
         this.endereco = vendedor.getEndereco();
         this.salario = vendedor.getSalario();
-        //this.contratos = vendedor.getContratos();
     }
 
     public VendedorDTO(VendedorCreateDTO vendedor) {
-        this.id = vendedor.getId();
         this.nome = vendedor.getNome();
         this.cpf = vendedor.getCpf();
         this.dataNascimento = vendedor.getDataNascimento();
@@ -81,6 +76,5 @@ public class VendedorDTO extends RepresentationModel<VendedorDTO> implements Ser
         this.genero = vendedor.getGenero();
         this.endereco = vendedor.getEndereco();
         this.salario = vendedor.getSalario();
-        //this.contratos = vendedor.getContratos();
     }
 }

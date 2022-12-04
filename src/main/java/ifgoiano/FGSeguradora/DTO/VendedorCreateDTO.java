@@ -22,8 +22,6 @@ import java.time.LocalDate;
 public class VendedorCreateDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
-
-    private Long id;
     @NotEmpty(message = "Campo NOME é requerido.")
     @Length(min = 3, max = 100, message = "O campo nome deve possuir entre 3 á 100 caracteres.")
     private String nome;
@@ -42,7 +40,6 @@ public class VendedorCreateDTO implements Serializable {
     @Length(min = 3, max = 100, message = "O campo SENHA deve possuir entre 3 á 100 caracteres.")
     private String senha;
     @Enumerated(EnumType.STRING)
-
     private Genero genero;
     @NotEmpty(message = "Campo ENDERECO é requerido.")
     @Length(min = 3, max = 100, message = "O campo ENDERECO deve possuir entre 3 á 100 caracteres.")
@@ -52,10 +49,8 @@ public class VendedorCreateDTO implements Serializable {
     @Range(min = 30, max = 100000, message = "A quantidade mínima 30 reais a máxima 100.000 reais")
     private Double salario;
 
-    // private List<Contrato> contratos;
 
     public VendedorCreateDTO(Vendedor vendedor) {
-        this.id = vendedor.getId();
         this.nome = vendedor.getNome();
         this.cpf = vendedor.getCpf();
         this.dataNascimento = vendedor.getDataNascimento();
@@ -64,7 +59,6 @@ public class VendedorCreateDTO implements Serializable {
         this.genero = vendedor.getGenero();
         this.endereco = vendedor.getEndereco();
         this.salario = vendedor.getSalario();
-        //this.contratos = vendedor.getContratos();
     }
 
 }

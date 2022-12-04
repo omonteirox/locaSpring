@@ -42,7 +42,8 @@ public class ClienteController {
 
     @PostMapping
     @ApiOperation(value = "Criar Cliente")
-    public ResponseEntity<MensagemRespostaDTO> create(@Valid @RequestBody ClienteCreateDTO objDTO) throws ObjectNotFoundException {
+    public ResponseEntity<MensagemRespostaDTO> create(@Valid @RequestBody ClienteCreateDTO objDTO)
+            throws ObjectNotFoundException {
         var obj = service.create(objDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(obj);
     }

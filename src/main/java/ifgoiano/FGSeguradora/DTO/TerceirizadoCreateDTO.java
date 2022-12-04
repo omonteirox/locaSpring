@@ -1,23 +1,19 @@
 package ifgoiano.FGSeguradora.DTO;
 
 import ifgoiano.FGSeguradora.models.Servico;
-import ifgoiano.FGSeguradora.models.Terceirizado;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class TerceirizadoDTO {
-
-
-    private Long id;
+@NoArgsConstructor
+public class TerceirizadoCreateDTO {
 
     @NotEmpty(message = "Campo RAZAOSOCIAL é requerido.")
     @Length(min = 3, max = 100, message = "O campo RAZAOSOCIAL deve possuir entre 3 á 100 caracteres.")
@@ -31,8 +27,6 @@ public class TerceirizadoDTO {
     @NotEmpty(message = "Campo CNPJ é requerido.")
     private String cnpj;
 
-    private List<Servico> servicos;
 
-
+    private List<ServicoCreateDTO> servicos;
 }
-

@@ -19,19 +19,19 @@ public class VendedorService {
     @Autowired
     private VendedorRepository repository;
 
-    public List<Vendedor> findAll(){
+    public List<Vendedor> findAll() {
         return repository.findAll();
     }
 
-    public Vendedor findById(Long id){
+    public Vendedor findById(Long id) {
         Optional<Vendedor> obj = repository.findById(id);
-        return obj.orElseThrow(()-> new ObjectNotFoundException("Vendedor não encontrado!! ID: "+
-        id + ", Tipo: " + Vendedor.class.getName()));
+        return obj.orElseThrow(() -> new ObjectNotFoundException("Vendedor não encontrado!! ID: " +
+                id + ", Tipo: " + Vendedor.class.getName()));
     }
 
-    public Vendedor create(@Valid VendedorCreateDTO objDTO){
+    public Vendedor create(@Valid VendedorCreateDTO objDTO) {
         VendedorDTO newObjDTO = new VendedorDTO(objDTO);
-        if(findByCPF(newObjDTO) !=null){
+        if (findByCPF(newObjDTO) != null) {
             throw new DataIntegratyViolationException("CPF já cadastrado na base de dados!");
         }
         return repository.save(new Vendedor(null,
@@ -45,10 +45,11 @@ public class VendedorService {
                 objDTO.getSalario()
         ));
     }
+
     public Vendedor update(Long id, VendedorCreateDTO objDTO) {
         Vendedor vendedorUpdate = findById(id);
         VendedorDTO newObjDTO = new VendedorDTO(objDTO);
-        if(findByCPF(newObjDTO) !=null && findByCPF(newObjDTO).getId() != id){
+        if (findByCPF(newObjDTO) != null && findByCPF(newObjDTO).getId() != id) {
             throw new DataIntegratyViolationException("CPF já cadastrado na base de dados!");
         }
         vendedorUpdate.setNome(objDTO.getNome());
@@ -59,7 +60,6 @@ public class VendedorService {
         vendedorUpdate.setGenero(objDTO.getGenero());
         vendedorUpdate.setEndereco(objDTO.getEndereco());
         vendedorUpdate.setSalario(objDTO.getSalario());
-        //vendedorUpdate.setContratos(objDTO.getContratos());
         return repository.save(vendedorUpdate);
     }
 
@@ -69,9 +69,9 @@ public class VendedorService {
     }
 
 
-    private Vendedor findByCPF(VendedorDTO objDTO){
+    private Vendedor findByCPF(VendedorDTO objDTO) {
         Vendedor obj = repository.findByCPF(objDTO.getCpf());
-        if(obj!=null){
+        if (obj != null) {
             return obj;
         }
         return null;

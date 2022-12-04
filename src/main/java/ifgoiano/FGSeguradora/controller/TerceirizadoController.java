@@ -1,11 +1,15 @@
 package ifgoiano.FGSeguradora.controller;
 
+import ifgoiano.FGSeguradora.DTO.MensagemRespostaDTO;
+import ifgoiano.FGSeguradora.DTO.TerceirizadoCreateDTO;
 import ifgoiano.FGSeguradora.DTO.TerceirizadoDTO;
+import ifgoiano.FGSeguradora.mapper.TerceirizadoMapper;
 import ifgoiano.FGSeguradora.models.Terceirizado;
 import ifgoiano.FGSeguradora.repository.TerceirizadoRepository;
 import ifgoiano.FGSeguradora.service.TerceirizadoService;
 import io.swagger.annotations.Api;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.hibernate.ObjectDeletedException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,17 +20,22 @@ import java.util.List;
 @RestController
 @RequestMapping("/terceirizado")
 public class TerceirizadoController {
-    @Autowired
-    public TerceirizadoService service;
+    private final TerceirizadoService service;
+    private final TerceirizadoRepository repository;
+    private final TerceirizadoMapper mapper;
 
-    @Autowired
-    public TerceirizadoRepository repository;
+    public TerceirizadoController(TerceirizadoService service, TerceirizadoRepository repository, TerceirizadoMapper mapper) {
+        this.service = service;
+        this.repository = repository;
+        this.mapper = mapper;
+    }
+
+
     @PostMapping("/create")
 
-    public ResponseEntity<Terceirizado> create(@RequestBody Terceirizado terceirizado) {
-        Terceirizado obj = service.create(terceirizado);
-        return ResponseEntity.ok().body(obj);
-
+    public ResponseEntity<MensagemRespostaDTO> create(@RequestBody TerceirizadoCreateDTO terceirizado) throws ObjectDeletedException {
+        var obj = service.create(terceirizado);
+        return ResponseEntity.status(HttpStatus.CREATED).body(obj);
     }
 
     @GetMapping("/detalhes/{id}")

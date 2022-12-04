@@ -22,7 +22,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @RequestMapping(value = "/vendedor")
-@Api(tags = "Vendedor",description = "Tudo sobre Vendedor")
+@Api(tags = "Vendedor", description = "Tudo sobre Vendedor")
 public class VendedorController {
 
     @Autowired
@@ -39,12 +39,14 @@ public class VendedorController {
                 findById(p.getId())).withRel("Acessar o vendedor e contratos vinculados: ")));
         return ResponseEntity.ok().body(objDTO);
     }
+
     @ApiOperation(value = "Consultar o Vendedor")
     @GetMapping("/{id}")
     public ResponseEntity<Vendedor> findById(@PathVariable Long id) {
         Vendedor obj = service.findById(id);
         return ResponseEntity.ok().body(obj);
     }
+
     @ApiOperation(value = "Atualizar um Vendedor")
     @PutMapping(value = "/{id}")
     public ResponseEntity<VendedorDTO> update(@PathVariable Long id, @Valid @RequestBody VendedorCreateDTO objDTO) {
@@ -52,6 +54,7 @@ public class VendedorController {
         return ResponseEntity.ok().body(newObj);
 
     }
+
     @ApiOperation(value = "Criar um vendedor")
     @PostMapping
     public ResponseEntity<VendedorDTO> create(@Valid @RequestBody VendedorCreateDTO objDTO) {
@@ -60,6 +63,7 @@ public class VendedorController {
                 .fromCurrentRequest().path("/{id}").buildAndExpand(newObj.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
+
     @ApiOperation(value = "deletar um Vendedor")
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {

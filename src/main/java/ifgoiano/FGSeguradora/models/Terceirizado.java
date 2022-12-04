@@ -38,12 +38,6 @@ public class Terceirizado {
     @ManyToMany(targetEntity = Servico.class, cascade = CascadeType.ALL)
     private List<Servico> servicos;
 
-    public Terceirizado(Long id, String razaoSocial, String telefone, String cnpj) {
-        this.id = id;
-        this.razaoSocial = razaoSocial;
-        this.telefone = telefone;
-        this.cnpj = cnpj;
-    }
 
 
 }
