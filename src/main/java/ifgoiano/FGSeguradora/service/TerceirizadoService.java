@@ -1,10 +1,9 @@
 package ifgoiano.FGSeguradora.service;
 
-import ifgoiano.FGSeguradora.DTO.MensagemRespostaDTO;
-import ifgoiano.FGSeguradora.DTO.ServicoDTO;
-import ifgoiano.FGSeguradora.DTO.TerceirizadoCreateDTO;
-import ifgoiano.FGSeguradora.DTO.TerceirizadoDTO;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import ifgoiano.FGSeguradora.DTO.*;
 import ifgoiano.FGSeguradora.exception.DataIntegratyViolationException;
+import ifgoiano.FGSeguradora.mapper.ServicoMapper;
 import ifgoiano.FGSeguradora.mapper.TerceirizadoMapper;
 import ifgoiano.FGSeguradora.models.Servico;
 import ifgoiano.FGSeguradora.models.Terceirizado;
@@ -17,21 +16,26 @@ import java.util.List;
 
 
 @Service
+
 public class TerceirizadoService {
     private final TerceirizadoRepository repository;
     private final TerceirizadoMapper mapper;
 
-    public TerceirizadoService(TerceirizadoRepository repository, TerceirizadoMapper mapper) {
+    private final ServicoMapper servicoMapper;
+
+    public TerceirizadoService(TerceirizadoRepository repository, TerceirizadoMapper mapper, ServicoMapper servicoMapper) {
         this.repository = repository;
         this.mapper = mapper;
+        this.servicoMapper = servicoMapper;
     }
 
 
     public List<TerceirizadoDTO> findAll() {
         List<Terceirizado> terceirizadoList = repository.findAll();
+        List<TerceirizadoDTO> servicoCreate = mapper.toTerceirizadoCreateDTOList(terceirizadoList);
         if(terceirizadoList.size()>0) {
             List<TerceirizadoDTO> terceirizadoDTOList = new ArrayList<>();
-            for (Terceirizado terceirizado : terceirizadoList) {
+            for (TerceirizadoDTO terceirizado : servicoCreate) {
                 TerceirizadoDTO terceirizadoDTO = new TerceirizadoDTO();
                 terceirizadoDTO.setId(terceirizado.getId());
                 terceirizadoDTO.setCnpj(terceirizado.getCnpj());
@@ -43,7 +47,7 @@ public class TerceirizadoService {
             return terceirizadoDTOList;
         } else return new ArrayList<TerceirizadoDTO>();
     }
-    
+
     public MensagemRespostaDTO create(@Valid TerceirizadoCreateDTO objDTO) {
         if(findByCNPJ(objDTO) != null){
             throw new DataIntegratyViolationException("CNPJ já cadastrado na base de dados!");
@@ -65,7 +69,7 @@ public class TerceirizadoService {
         terceirizadoDTO.setCnpj(terceirizado.getCnpj());
         terceirizadoDTO.setRazaoSocial(terceirizado.getRazaoSocial());
         terceirizadoDTO.setTelefone(terceirizado.getTelefone());
-//        terceirizadoDTO.setServicos(getServicosList(terceirizado));
+//        terceirizadoDTO.setServicos(terceirizado.getServicos());
         return terceirizadoDTO;
     }
 

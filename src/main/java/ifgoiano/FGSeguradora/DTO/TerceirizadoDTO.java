@@ -31,7 +31,7 @@ public class TerceirizadoDTO {
     @NotEmpty(message = "Campo CNPJ é requerido.")
     private String cnpj;
 
-    private List<Servico> servicos;
+    private List<ServicoCreateDTO> servicos;
 
 
 }

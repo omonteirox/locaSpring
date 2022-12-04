@@ -34,7 +34,7 @@ public class ServicoDTO {
     private LocalDate dataServicoPrestado;
 
 
-    private List<TerceirizadoDTO> terceirizados;
+   private List<TerceirizadoDTO> terceirizados;
 
 
 }
