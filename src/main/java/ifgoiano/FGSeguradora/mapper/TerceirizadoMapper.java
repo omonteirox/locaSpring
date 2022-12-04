@@ -21,12 +21,14 @@ public class TerceirizadoMapper {
     public Terceirizado toTerceirizadoCreate(TerceirizadoCreateDTO terceirizadoCreateDTO){
         return MODEL_MAPPER.map(terceirizadoCreateDTO, Terceirizado.class);
     }
+    public Terceirizado toTerceirizado(TerceirizadoDTO terceirizadoDTO){
+        return MODEL_MAPPER.map(terceirizadoDTO, Terceirizado.class);
+    }
+
     public TerceirizadoDTO toTerceirizadoDTO(Terceirizado terceirizado){
         return MODEL_MAPPER.map(terceirizado, TerceirizadoDTO.class);
     }
-    public List<Terceirizado> toTerceirizadoList(List<TerceirizadoCreateDTO> terceirizadoDTOList) {
-        return terceirizadoDTOList.stream().map(this::toTerceirizadoCreate).collect(Collectors.toList());
-    }
+
     public List<TerceirizadoDTO> toTerceirizadoCreateDTOList(List<Terceirizado> terceirizadoDTOList){
         return terceirizadoDTOList.stream().map(this::toTerceirizadoDTO).collect(Collectors.toList());
     }

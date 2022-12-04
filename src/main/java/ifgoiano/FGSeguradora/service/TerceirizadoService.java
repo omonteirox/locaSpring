@@ -3,8 +3,10 @@ package ifgoiano.FGSeguradora.service;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import ifgoiano.FGSeguradora.DTO.*;
 import ifgoiano.FGSeguradora.exception.DataIntegratyViolationException;
+import ifgoiano.FGSeguradora.exception.ObjectNotFoundException;
 import ifgoiano.FGSeguradora.mapper.ServicoMapper;
 import ifgoiano.FGSeguradora.mapper.TerceirizadoMapper;
+import ifgoiano.FGSeguradora.models.Gerente;
 import ifgoiano.FGSeguradora.models.Servico;
 import ifgoiano.FGSeguradora.models.Terceirizado;
 import ifgoiano.FGSeguradora.repository.TerceirizadoRepository;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -62,31 +65,38 @@ public class TerceirizadoService {
                 .mensagem("Terceirizado com id " + terceirizadoCreate.getId() + " criado." )
                 .build();
     }
-    public TerceirizadoDTO findById(Long id) {
-        Terceirizado terceirizado = repository.findById(id).get();
+    public TerceirizadoDTO findById(Long id)  throws ObjectNotFoundException{
+        Terceirizado terceirizado = verificaSeExiste(id);
+        TerceirizadoDTO terceirizadoDTOList= mapper.toTerceirizadoDTO(terceirizado);
         TerceirizadoDTO terceirizadoDTO = new TerceirizadoDTO();
-        terceirizadoDTO.setId(terceirizado.getId());
-        terceirizadoDTO.setCnpj(terceirizado.getCnpj());
-        terceirizadoDTO.setRazaoSocial(terceirizado.getRazaoSocial());
-        terceirizadoDTO.setTelefone(terceirizado.getTelefone());
-//        terceirizadoDTO.setServicos(terceirizado.getServicos());
+        terceirizadoDTO.setId(terceirizadoDTOList.getId());
+        terceirizadoDTO.setCnpj(terceirizadoDTOList.getCnpj());
+        terceirizadoDTO.setRazaoSocial(terceirizadoDTOList.getRazaoSocial());
+        terceirizadoDTO.setTelefone(terceirizadoDTOList.getTelefone());
+        terceirizadoDTO.setServicos(terceirizadoDTOList.getServicos());
         return terceirizadoDTO;
     }
 
-    public Terceirizado update(Long id, Terceirizado objDTO) {
-        Terceirizado newObj = repository.findById(id).get();
-//        if(findByCNPJ(objDTO) !=null && findByCNPJ(objDTO).getId() != id){
-//            throw new DataIntegratyViolationException("CNPJ já cadastrado na base de dados!");
-//        }
-        newObj.setRazaoSocial(objDTO.getRazaoSocial());
-        newObj.setTelefone(objDTO.getTelefone());
-        newObj.setCnpj(objDTO.getCnpj());
-        newObj.setServicos(objDTO.getServicos());
-        return repository.save(newObj);
+    public MensagemRespostaDTO update(Long id, TerceirizadoDTO objDTO) {
+        Terceirizado newObj = verificaSeExiste(id);
+        TerceirizadoDTO terceirizadoDTOList= mapper.toTerceirizadoDTO(newObj);
+        if(findByCNPJCreate(objDTO) !=null && findByCNPJCreate(objDTO).getId() != id){
+            throw new DataIntegratyViolationException("CNPJ já cadastrado na base de dados!");
+        }
+        terceirizadoDTOList.setRazaoSocial(objDTO.getRazaoSocial());
+        terceirizadoDTOList.setTelefone(objDTO.getTelefone());
+        terceirizadoDTOList.setCnpj(objDTO.getCnpj());
+        terceirizadoDTOList.setServicos(objDTO.getServicos());
+
+        Terceirizado terceirizadoCreate = mapper.toTerceirizado(terceirizadoDTOList);
+        repository.save(terceirizadoCreate);
+        return MensagemRespostaDTO.builder()
+                .mensagem("Terceirizado com id " + terceirizadoCreate.getId() + " alterado." )
+                .build();
     }
 
     public void delete(Long id) {
-        findById(id);
+        verificaSeExiste(id);
         repository.deleteById(id);
     }
 
@@ -97,4 +107,18 @@ public class TerceirizadoService {
         }
         return null;
     }
+    private Terceirizado findByCNPJCreate(TerceirizadoDTO objDTO){
+        Terceirizado obj = repository.findByCNPJ(objDTO.getCnpj());
+        if(obj!=null){
+            return obj;
+        }
+        return null;
+    }
+    public Terceirizado verificaSeExiste(Long id) throws ObjectNotFoundException {
+        Terceirizado terceirizado = repository.findById(id)
+                .orElseThrow(() -> new ObjectNotFoundException(id));
+        return terceirizado;
+    }
+
+
 }

@@ -3,6 +3,7 @@ package ifgoiano.FGSeguradora.controller;
 import ifgoiano.FGSeguradora.DTO.MensagemRespostaDTO;
 import ifgoiano.FGSeguradora.DTO.TerceirizadoCreateDTO;
 import ifgoiano.FGSeguradora.DTO.TerceirizadoDTO;
+import ifgoiano.FGSeguradora.exception.ObjectNotFoundException;
 import ifgoiano.FGSeguradora.mapper.TerceirizadoMapper;
 import ifgoiano.FGSeguradora.models.Terceirizado;
 import ifgoiano.FGSeguradora.repository.TerceirizadoRepository;
@@ -39,32 +40,30 @@ public class TerceirizadoController {
     }
 
     @GetMapping("/detalhes/{id}")
-
-    public TerceirizadoDTO findById(@PathVariable Long id) {
+    public ResponseEntity<TerceirizadoDTO> findById(@PathVariable Long id) throws ObjectDeletedException{
         if(repository.findById(id).isPresent()) {
-            return service.findById(id);
+            var obj = service.findById(id);
+            return ResponseEntity.status(HttpStatus.CREATED).body(obj);
         }
-    else return  null;
+    else return  ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 
     }
 
     @GetMapping("/all")
-
     public List<TerceirizadoDTO> findAll() {
         return service.findAll();
     }
 
     @PutMapping("/atualizar/{id}")
 
-    public Terceirizado update(@PathVariable Long id, @RequestBody Terceirizado terceirizado) {
-
-        return service.update(id,terceirizado);
-
+    public ResponseEntity<MensagemRespostaDTO> update(@PathVariable Long id, @RequestBody TerceirizadoDTO terceirizado) throws ObjectNotFoundException {
+        var obj = service.update(id,terceirizado);
+        return ResponseEntity.status(HttpStatus.CREATED).body(obj);
     }
 
     @DeleteMapping("/deletar/{id}")
 
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable Long id) throws ObjectDeletedException{
         service.delete(id);
         return ResponseEntity.noContent().build();
 

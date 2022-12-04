@@ -1,8 +1,10 @@
 package ifgoiano.FGSeguradora.service;
 
+import ifgoiano.FGSeguradora.DTO.MensagemRespostaDTO;
 import ifgoiano.FGSeguradora.DTO.ServicoDTO;
-import ifgoiano.FGSeguradora.DTO.TerceirizadoDTO;
+import ifgoiano.FGSeguradora.DTO.TerceirizadoUpdateDTO;
 import ifgoiano.FGSeguradora.exception.ObjectNotFoundException;
+import ifgoiano.FGSeguradora.mapper.ServicoMapper;
 import ifgoiano.FGSeguradora.models.Servico;
 import ifgoiano.FGSeguradora.models.Terceirizado;
 import ifgoiano.FGSeguradora.repository.ServicoRepository;
@@ -11,50 +13,56 @@ import org.springframework.stereotype.Service;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ServicoService {
     private final ServicoRepository repository;
+    private final ServicoMapper mapper;
 
-    public ServicoService(ServicoRepository repository) {
+    public ServicoService(ServicoRepository repository, ServicoMapper mapper) {
         this.repository = repository;
+        this.mapper = mapper;
     }
+
 
     public List<ServicoDTO> findAll() {
         List<Servico> servicoList = repository.findAll();
+        List<ServicoDTO> servicoDTOList = mapper.toServicoDTOList(servicoList);
         if(servicoList.size()>0) {
-            List<ServicoDTO> servicoDTOList = new ArrayList<>();
-            for (Servico servico : servicoList) {
+            List<ServicoDTO> servicoDTOList2 = new ArrayList<>();
+            for (ServicoDTO servico : servicoDTOList) {
                 ServicoDTO servicoDTO = new ServicoDTO();
                 servicoDTO.setId(servico.getId());
                 servicoDTO.setDescricao(servico.getDescricao());
                 servicoDTO.setDataServicoPrestado(servico.getDataServicoPrestado());
                 servicoDTO.setValor(servico.getValor());
-                servicoDTO.setTerceirizados(getTerceirizadosList(servico));
-                servicoDTOList.add(servicoDTO);
+                servicoDTO.setTerceirizados(servico.getTerceirizados());
+                servicoDTOList2.add(servicoDTO);
             }
-            return servicoDTOList;
+            return servicoDTOList2;
         } else return new ArrayList<ServicoDTO>();
     }
 
-    public Servico create(@Valid Servico obj) {
-        return repository.save(new Servico(null,
-                obj.getValor(),
-                obj.getDescricao(),
-                obj.getDataServicoPrestado(),
-                obj.getSeguro(),
-                obj.getTerceirizados()
-        ));
+    public MensagemRespostaDTO create(@Valid ServicoDTO obj) {
+        Servico servicoCreate = mapper.toServicoCreate(obj);
+        servicoCreate.setValor(obj.getValor());
+        servicoCreate.setDescricao(obj.getDescricao());
+        servicoCreate.setDataServicoPrestado(obj.getDataServicoPrestado());
+        servicoCreate.getTerceirizados();
+        repository.save(servicoCreate);
+        return MensagemRespostaDTO.builder()
+                .mensagem("Seriço com id " + obj.getId() + " criado." )
+                .build();
     }
     public ServicoDTO findById(Long id) {
-        Servico servico = repository.findById(id).get();
+        Servico servico = verificaSeExiste(id);
+        ServicoDTO converterToServicoDTO = mapper.toServicoDTO(servico);
         ServicoDTO servicoDTO = new ServicoDTO();
-        servicoDTO.setId(servico.getId());
-        servicoDTO.setDescricao(servico.getDescricao());
-        servicoDTO.setDataServicoPrestado(servico.getDataServicoPrestado());
-        servicoDTO.setValor(servico.getValor());
-        servicoDTO.setTerceirizados(getTerceirizadosList(servico));
+        servicoDTO.setId(converterToServicoDTO.getId());
+        servicoDTO.setDescricao(converterToServicoDTO.getDescricao());
+        servicoDTO.setDataServicoPrestado(converterToServicoDTO.getDataServicoPrestado());
+        servicoDTO.setValor(converterToServicoDTO.getValor());
+        servicoDTO.setTerceirizados(converterToServicoDTO.getTerceirizados());
         return servicoDTO;
     }
 
@@ -63,24 +71,18 @@ public class ServicoService {
         newObj.setValor(objDTO.getValor());
         newObj.setDescricao(objDTO.getDescricao());
         newObj.setDataServicoPrestado(objDTO.getDataServicoPrestado());
-        newObj.setSeguro(objDTO.getSeguro());
+//        newObj.setSeguro(objDTO.getSeguro());
         return repository.save(newObj);
     }
 
     public void delete(Long id) {
-        findById(id);
+        verificaSeExiste(id);
         repository.deleteById(id);
     }
-    private List<TerceirizadoDTO> getTerceirizadosList(Servico servico) {
-        List<TerceirizadoDTO> servicoDTOList = new ArrayList<>();
-        for(int i=0; i< servico.getTerceirizados().size(); i++) {
-            TerceirizadoDTO terceirizadoDTO = new TerceirizadoDTO();
-            terceirizadoDTO.setId(servico.getTerceirizados().get(i).getId());
-            terceirizadoDTO.setTelefone(servico.getTerceirizados().get(i).getTelefone());
-            terceirizadoDTO.setCnpj(servico.getTerceirizados().get(i).getCnpj());
-            terceirizadoDTO.setRazaoSocial(servico.getTerceirizados().get(i).getRazaoSocial());
-            servicoDTOList.add(terceirizadoDTO);
-        }
-        return servicoDTOList;
+
+    public Servico verificaSeExiste(Long id) throws ObjectNotFoundException {
+        Servico servico = repository.findById(id)
+                .orElseThrow(() -> new ObjectNotFoundException(id));
+        return servico;
     }
 }

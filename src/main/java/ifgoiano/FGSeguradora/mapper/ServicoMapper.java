@@ -15,14 +15,22 @@ import java.util.stream.Collectors;
 public class ServicoMapper {
     private static final ModelMapper MODEL_MAPPER = new ModelMapper();
 
-    public Servico toServicoCreate(ServicoDTO servicoDTOCreateDTO){
-        return MODEL_MAPPER.map(servicoDTOCreateDTO, Servico.class);
+    public Servico toServicoCreate(ServicoDTO servicoDTO){
+        return MODEL_MAPPER.map(servicoDTO, Servico.class);
     }
     public Servico toServico(ServicoCreateDTO servicoDTOCreateDTO){
         return MODEL_MAPPER.map(servicoDTOCreateDTO, Servico.class);
     }
+
+    public ServicoDTO toServicoDTO(Servico servicoDTO){
+        return MODEL_MAPPER.map(servicoDTO, ServicoDTO.class);
+    }
     public List<Servico> toServicoList(List<ServicoCreateDTO> servicoDTOList) {
         return servicoDTOList.stream().map(this::toServico).collect(Collectors.toList());
     }
+    public List<ServicoDTO> toServicoDTOList(List<Servico> servicoDTOList) {
+        return servicoDTOList.stream().map(this::toServicoDTO).collect(Collectors.toList());
+    }
+
 
 }
