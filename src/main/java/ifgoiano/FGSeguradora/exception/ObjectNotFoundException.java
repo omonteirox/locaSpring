@@ -6,6 +6,9 @@ public class ObjectNotFoundException extends RuntimeException {
     public ObjectNotFoundException(String message) {
         super(message);
     }
+    public ObjectNotFoundException(Long id) {
+        super("Objeto com id: "+id+" não encontrado!");
+    }
 
     public ObjectNotFoundException(String message, Throwable cause) {
         super(message, cause);

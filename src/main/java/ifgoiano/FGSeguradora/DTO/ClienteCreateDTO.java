@@ -2,8 +2,6 @@ package ifgoiano.FGSeguradora.DTO;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import ifgoiano.FGSeguradora.enums.Genero;
-import ifgoiano.FGSeguradora.models.Cliente;
-import ifgoiano.FGSeguradora.models.Gerente;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,19 +10,18 @@ import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.validation.constraints.Email;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ClienteDTO implements Serializable {
-    private static final long serialVersionUID = 1l;
+public class ClienteCreateDTO {
 
-    private Long id;
     @NotEmpty(message = "Campo NOME é requerido.")
     @Length(min = 3, max = 100, message = "O campo nome deve possuir entre 3 á 100 caracteres.")
     private String nome;
@@ -40,18 +37,5 @@ public class ClienteDTO implements Serializable {
     @Length(min = 3, max = 100, message = "O campo ENDERECO deve possuir entre 3 á 100 caracteres.")
     private String endereco;
 
-    private String automoveis;
-
-//    private String seguros;
-
-    public ClienteDTO(Cliente cliente) {
-        this.id = cliente.getId();
-        this.nome = cliente.getNome();
-        this.cpf = cliente.getCpf();
-        this.dataNascimento = cliente.getDataNascimento();
-        this.genero = cliente.getGenero();
-        this.endereco = cliente.getEndereco();
-//        this.seguros = cliente.getSeguros();
-    }
-
+    private List<Long> automoveis_id;
 }

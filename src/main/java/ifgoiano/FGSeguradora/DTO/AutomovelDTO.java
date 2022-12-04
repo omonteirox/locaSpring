@@ -1,7 +1,8 @@
-package ifgoiano.FGSeguradora.models;
+package ifgoiano.FGSeguradora.DTO;
 
 import ifgoiano.FGSeguradora.enums.AutomovelTipo;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,10 +11,9 @@ import javax.persistence.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-public class Automovel {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class AutomovelDTO {
+
+
     private Long id;
 
     @Enumerated(EnumType.STRING)
@@ -32,6 +32,5 @@ public class Automovel {
     private String chassi;
 
     private String modelo;
-
 
 }
