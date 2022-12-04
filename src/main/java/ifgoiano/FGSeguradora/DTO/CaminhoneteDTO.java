@@ -1,7 +1,7 @@
 package ifgoiano.FGSeguradora.DTO;
 
-import ifgoiano.FGSeguradora.models.Caminhonete;
-import ifgoiano.FGSeguradora.models.Carro;
+import ifgoiano.FGSeguradora.enums.AutomovelTipo;
+import ifgoiano.FGSeguradora.models.Automovel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,6 +17,7 @@ import java.io.Serializable;
 public class CaminhoneteDTO implements Serializable {
     private static final long serialVersionUID = 1l;
     private Long id;
+    private AutomovelTipo tipoAutomovel;
     @Length(min = 5, max = 20, message = "O campo deve possuir de 5 até 20 caracteres")
     private String cor;
     @NotNull(message = "Campo valorFipe requerido")
@@ -37,8 +38,10 @@ public class CaminhoneteDTO implements Serializable {
     private boolean carroceriaDupla;
     @NotNull(message = "Campo Quatro por quatro requerido")
     private boolean quatroPorQuatro;
+    @NotNull(message = "Não pode ser nulo")
+    private int quantidadePortas;
 
-    public CaminhoneteDTO(Caminhonete caminhonete) {
+    public CaminhoneteDTO(Automovel caminhonete) {
         this.id = caminhonete.getId();
         this.cor = caminhonete.getCor();
         this.valorFipe = caminhonete.getValorFipe();
@@ -139,5 +142,22 @@ public class CaminhoneteDTO implements Serializable {
 
     public void setQuatroPorQuatro(boolean quatroPorQuatro) {
         this.quatroPorQuatro = quatroPorQuatro;
+    }
+
+
+    public int getQuantidadePortas() {
+        return quantidadePortas;
+    }
+
+    public void setQuantidadePortas(int quantidadePortas) {
+        this.quantidadePortas = quantidadePortas;
+    }
+
+    public AutomovelTipo getTipoAutomovel() {
+        return tipoAutomovel;
+    }
+
+    public void setTipoAutomovel(AutomovelTipo tipoAutomovel) {
+        this.tipoAutomovel = tipoAutomovel;
     }
 }

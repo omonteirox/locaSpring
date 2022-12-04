@@ -3,8 +3,8 @@ package ifgoiano.FGSeguradora.service;
 import ifgoiano.FGSeguradora.DTO.CarroDTO;
 import ifgoiano.FGSeguradora.exception.DataIntegratyViolationException;
 import ifgoiano.FGSeguradora.exception.ObjectNotFoundException;
-import ifgoiano.FGSeguradora.models.Carro;
-import ifgoiano.FGSeguradora.repository.CarroRepository;
+import ifgoiano.FGSeguradora.models.Automovel;
+import ifgoiano.FGSeguradora.repository.AutomovelRepository;
 import org.springframework.stereotype.Service;
 
 import javax.validation.Valid;
@@ -13,23 +13,24 @@ import java.util.Optional;
 
 @Service
 public class CarroService {
-    private final CarroRepository repository;
 
-    public CarroService(CarroRepository repository) {
+    private final AutomovelRepository repository;
+
+    public CarroService(AutomovelRepository repository) {
         this.repository = repository;
     }
 
-    public List<Carro> findAll() {
-        return repository.findAll();
+    public List<Automovel> findAll() {
+        return repository.findAllCarros();
     }
 
-    public Carro create(@Valid CarroDTO objDTO) {
+    public Automovel create(@Valid CarroDTO objDTO) {
         if (findByChassi(objDTO) != null)
             throw new DataIntegratyViolationException("Chassi já cadastrado na base de dados!");
         if (findByPlaca(objDTO) != null)
             throw new DataIntegratyViolationException("Placa já cadastrado na base de dados!");
-
-        return repository.save(new Carro(null,
+        return repository.save(new Automovel(null,
+                objDTO.getTipoAutomovel(),
                 objDTO.getCor(),
                 objDTO.getValorFipe(),
                 objDTO.getAno(),
@@ -42,10 +43,10 @@ public class CarroService {
         ));
     }
 
-    public Carro findById(Long id) {
-        Optional<Carro> findCarro = repository.findById(id);
-        return findCarro.orElseThrow(() -> new ObjectNotFoundException("Carro não encontrado!! ID: " + id + ", Tipo: "
-                + Carro.class.getName()));
+    public Automovel findById(Long id) {
+        Optional<Automovel> findCaminhonete = repository.findById(id);
+        return findCaminhonete.orElseThrow(() -> new ObjectNotFoundException("Caminhonete não encontrado!! ID: " + id + ", Tipo: "
+                + Automovel.class.getName()));
     }
 
     public void delete(Long id) {
@@ -53,12 +54,14 @@ public class CarroService {
         repository.deleteById(id);
     }
 
-    public Carro update(Long id, CarroDTO objDTO) {
-        Carro carroUpdate = findById(id);
+    public Automovel update(Long id, CarroDTO objDTO) {
+
+        Automovel carroUpdate = findById(id);
         if (objDTO.getChassi().equals(carroUpdate.getChassi()))
             throw new DataIntegratyViolationException("Chassi já cadastrado na base de dados!");
         if (objDTO.getPlaca().equals(carroUpdate.getPlaca()))
             throw new DataIntegratyViolationException("Placa já cadastrado na base de dados!");
+        carroUpdate.setTipoAutomovel(objDTO.getTipoAutomovel());
         carroUpdate.setCor(objDTO.getCor());
         carroUpdate.setValorFipe(objDTO.getValorFipe());
         carroUpdate.setAno(objDTO.getAno());
@@ -72,19 +75,20 @@ public class CarroService {
         return repository.save(carroUpdate);
     }
 
-    private Carro findByChassi(CarroDTO objDTO) {
-        Carro obj = repository.findByChassi(objDTO.getChassi());
+    private Automovel findByChassi(CarroDTO objDTO) {
+        Automovel obj = repository.findByChassi(objDTO.getChassi());
         if (obj != null) {
             return obj;
         }
         return null;
     }
 
-    private Carro findByPlaca(CarroDTO objDTO) {
-        Carro obj = repository.findByPlaca(objDTO.getPlaca());
+    private Automovel findByPlaca(CarroDTO objDTO) {
+        Automovel obj = repository.findByPlaca(objDTO.getPlaca());
         if (obj != null) {
             return obj;
         }
         return null;
     }
+
 }

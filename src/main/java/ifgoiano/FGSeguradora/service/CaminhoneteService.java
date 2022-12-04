@@ -3,8 +3,9 @@ package ifgoiano.FGSeguradora.service;
 import ifgoiano.FGSeguradora.DTO.CaminhoneteDTO;
 import ifgoiano.FGSeguradora.exception.DataIntegratyViolationException;
 import ifgoiano.FGSeguradora.exception.ObjectNotFoundException;
-import ifgoiano.FGSeguradora.models.Caminhonete;
-import ifgoiano.FGSeguradora.repository.CaminhoneteRepository;
+import ifgoiano.FGSeguradora.models.Automovel;
+import ifgoiano.FGSeguradora.models.Cliente;
+import ifgoiano.FGSeguradora.repository.AutomovelRepository;
 import org.springframework.stereotype.Service;
 
 import javax.validation.Valid;
@@ -13,23 +14,23 @@ import java.util.Optional;
 
 @Service
 public class CaminhoneteService {
-    private final CaminhoneteRepository repository;
+    private final AutomovelRepository repository;
 
-    public CaminhoneteService(CaminhoneteRepository repository) {
+    public CaminhoneteService(AutomovelRepository repository) {
         this.repository = repository;
     }
 
-    public List<Caminhonete> findAll() {
-        return repository.findAll();
+    public List<Automovel> findAll() {
+        return repository.findAllCaminhonetes();
     }
 
-    public Caminhonete create(@Valid CaminhoneteDTO objDTO) {
+    public Automovel create(@Valid CaminhoneteDTO objDTO) {
         if (findByChassi(objDTO) != null)
             throw new DataIntegratyViolationException("Chassi já cadastrado na base de dados!");
         if (findByPlaca(objDTO) != null)
             throw new DataIntegratyViolationException("Placa já cadastrado na base de dados!");
-
-        return repository.save(new Caminhonete(null,
+        return repository.save(new Automovel(null,
+                objDTO.getTipoAutomovel(),
                 objDTO.getCor(),
                 objDTO.getValorFipe(),
                 objDTO.getAno(),
@@ -39,14 +40,15 @@ public class CaminhoneteService {
                 objDTO.getModelo(),
                 objDTO.getCavalosPotencia(),
                 objDTO.isCarroceriaDupla(),
-                objDTO.isQuatroPorQuatro()
+                objDTO.isQuatroPorQuatro(),
+                objDTO.getQuantidadePortas()
         ));
     }
 
-    public Caminhonete findById(Long id) {
-        Optional<Caminhonete> findCaminhonete = repository.findById(id);
+    public Automovel findById(Long id) {
+        Optional<Automovel> findCaminhonete = repository.findById(id);
         return findCaminhonete.orElseThrow(() -> new ObjectNotFoundException("Caminhonete não encontrado!! ID: " + id + ", Tipo: "
-                + Caminhonete.class.getName()));
+                + Automovel.class.getName()));
     }
 
     public void delete(Long id) {
@@ -54,13 +56,14 @@ public class CaminhoneteService {
         repository.deleteById(id);
     }
 
-    public Caminhonete update(Long id, CaminhoneteDTO objDTO) {
+    public Automovel update(Long id, CaminhoneteDTO objDTO) {
 
-        Caminhonete caminhoneteUpdate = findById(id);
+        Automovel caminhoneteUpdate = findById(id);
         if (objDTO.getChassi().equals(caminhoneteUpdate.getChassi()))
             throw new DataIntegratyViolationException("Chassi já cadastrado na base de dados!");
         if (objDTO.getPlaca().equals(caminhoneteUpdate.getPlaca()))
             throw new DataIntegratyViolationException("Placa já cadastrado na base de dados!");
+        caminhoneteUpdate.setTipoAutomovel(objDTO.getTipoAutomovel());
         caminhoneteUpdate.setCor(objDTO.getCor());
         caminhoneteUpdate.setValorFipe(objDTO.getValorFipe());
         caminhoneteUpdate.setAno(objDTO.getAno());
@@ -71,23 +74,25 @@ public class CaminhoneteService {
         caminhoneteUpdate.setCavalosPotencia(objDTO.getCavalosPotencia());
         caminhoneteUpdate.setCarroceriaDupla(objDTO.isCarroceriaDupla());
         caminhoneteUpdate.setQuatroPorQuatro(objDTO.isQuatroPorQuatro());
+        caminhoneteUpdate.setQuantidadePortas(objDTO.getQuantidadePortas());
 
         return repository.save(caminhoneteUpdate);
     }
 
-    private Caminhonete findByChassi(CaminhoneteDTO objDTO) {
-        Caminhonete obj = repository.findByChassi(objDTO.getChassi());
+    private Automovel findByChassi(CaminhoneteDTO objDTO) {
+        Automovel obj = repository.findByChassi(objDTO.getChassi());
         if (obj != null) {
             return obj;
         }
         return null;
     }
 
-    private Caminhonete findByPlaca(CaminhoneteDTO objDTO) {
-        Caminhonete obj = repository.findByPlaca(objDTO.getPlaca());
+    private Automovel findByPlaca(CaminhoneteDTO objDTO) {
+        Automovel obj = repository.findByPlaca(objDTO.getPlaca());
         if (obj != null) {
             return obj;
         }
         return null;
     }
+
 }

@@ -1,7 +1,8 @@
 package ifgoiano.FGSeguradora.controller;
 
 import ifgoiano.FGSeguradora.DTO.CaminhoneteDTO;
-import ifgoiano.FGSeguradora.models.Caminhonete;
+import ifgoiano.FGSeguradora.mapper.AutomovelMapper;
+import ifgoiano.FGSeguradora.models.Automovel;
 import ifgoiano.FGSeguradora.service.CaminhoneteService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -19,9 +20,11 @@ import java.util.stream.Collectors;
 @RequestMapping("/caminhonete")
 public class CaminhoneteController {
     public final CaminhoneteService service;
+    private final AutomovelMapper mapper;
 
-    public CaminhoneteController(CaminhoneteService service) {
+    public CaminhoneteController(CaminhoneteService service, AutomovelMapper mapper) {
         this.service = service;
+        this.mapper = mapper;
     }
     @ApiOperation(value = "Consultar Caminhonete")
     @GetMapping(value = "/{id}")
@@ -32,7 +35,7 @@ public class CaminhoneteController {
     @ApiOperation(value = "Criar Caminhonete")
     @PostMapping
     public ResponseEntity<CaminhoneteDTO> create(@Valid @RequestBody CaminhoneteDTO objDTO) {
-        Caminhonete newObj = service.create(objDTO);
+        Automovel newObj = service.create(objDTO);
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest().path("/{id}").buildAndExpand(newObj.getId()).toUri();
         return ResponseEntity.created(uri).build();

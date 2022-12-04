@@ -1,6 +1,7 @@
 package ifgoiano.FGSeguradora.DTO;
 
-import ifgoiano.FGSeguradora.models.Moto;
+import ifgoiano.FGSeguradora.enums.AutomovelTipo;
+import ifgoiano.FGSeguradora.models.Automovel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,6 +17,7 @@ import java.io.Serializable;
 public class MotoDTO implements Serializable {
     private static final long serialVersionUID = 1l;
     private Long id;
+    private AutomovelTipo tipoAutomovel;
     @Length(min = 5, max = 20, message = "O campo deve possuir de 5 até 20 caracteres")
     private String cor;
     @NotNull(message = "Campo valorFipe requerido")
@@ -33,7 +35,7 @@ public class MotoDTO implements Serializable {
     private String categoria;
     private Double cilindrada;
 
-    public MotoDTO(Moto moto){
+    public MotoDTO(Automovel moto){
         this.id = moto.getId();
         this.cor = moto.getCor();
         this.valorFipe = moto.getValorFipe();
@@ -124,5 +126,13 @@ public class MotoDTO implements Serializable {
 
     public void setCilindrada(Double cilindrada) {
         this.cilindrada = cilindrada;
+    }
+
+    public AutomovelTipo getTipoAutomovel() {
+        return tipoAutomovel;
+    }
+
+    public void setTipoAutomovel(AutomovelTipo tipoAutomovel) {
+        this.tipoAutomovel = tipoAutomovel;
     }
 }

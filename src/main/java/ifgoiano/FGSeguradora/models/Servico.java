@@ -30,8 +30,6 @@ public class Servico {
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataServicoPrestado;
 
-    //@OneToOne
-    private String seguro;
 
     @ManyToMany(targetEntity = Terceirizado.class, mappedBy = "servicos", cascade = CascadeType.ALL)
     private List<Terceirizado> terceirizados ;
