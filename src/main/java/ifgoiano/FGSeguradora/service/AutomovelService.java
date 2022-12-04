@@ -37,7 +37,7 @@ public class AutomovelService {
 
     public MensagemRespostaDTO update(Long id, Automovel automovelAtualizado) throws ObjectNotFoundException {
         Automovel automovel = verificaSeExiste(id);
-        automovel.setAutomovelTipo(automovelAtualizado.getAutomovelTipo());
+        automovel.setTipoAutomovel(automovelAtualizado.getTipoAutomovel());
         automovel.setCor(automovelAtualizado.getCor());
         automovel.setValorFipe(automovelAtualizado.getValorFipe());
         automovel.setAno(automovelAtualizado.getAno());
