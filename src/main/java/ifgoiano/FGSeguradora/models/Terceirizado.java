@@ -2,8 +2,6 @@ package ifgoiano.FGSeguradora.models;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import ifgoiano.FGSeguradora.DTO.ServicoDTO;
-import ifgoiano.FGSeguradora.DTO.TerceirizadoDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

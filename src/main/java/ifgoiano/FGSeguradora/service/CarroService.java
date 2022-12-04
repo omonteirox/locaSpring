@@ -4,7 +4,6 @@ import ifgoiano.FGSeguradora.DTO.CarroDTO;
 import ifgoiano.FGSeguradora.exception.DataIntegratyViolationException;
 import ifgoiano.FGSeguradora.exception.ObjectNotFoundException;
 import ifgoiano.FGSeguradora.models.Automovel;
-import ifgoiano.FGSeguradora.models.Cliente;
 import ifgoiano.FGSeguradora.repository.AutomovelRepository;
 import org.springframework.stereotype.Service;
 

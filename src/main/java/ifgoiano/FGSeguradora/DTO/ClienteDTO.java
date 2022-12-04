@@ -3,7 +3,6 @@ package ifgoiano.FGSeguradora.DTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import ifgoiano.FGSeguradora.enums.Genero;
 import ifgoiano.FGSeguradora.models.Cliente;
-import ifgoiano.FGSeguradora.models.Gerente;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,7 +11,6 @@ import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;

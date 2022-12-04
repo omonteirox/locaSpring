@@ -2,11 +2,9 @@ package ifgoiano.FGSeguradora.service;
 
 import ifgoiano.FGSeguradora.DTO.MensagemRespostaDTO;
 import ifgoiano.FGSeguradora.DTO.ServicoDTO;
-import ifgoiano.FGSeguradora.DTO.TerceirizadoUpdateDTO;
 import ifgoiano.FGSeguradora.exception.ObjectNotFoundException;
 import ifgoiano.FGSeguradora.mapper.ServicoMapper;
 import ifgoiano.FGSeguradora.models.Servico;
-import ifgoiano.FGSeguradora.models.Terceirizado;
 import ifgoiano.FGSeguradora.repository.ServicoRepository;
 import org.springframework.stereotype.Service;
 

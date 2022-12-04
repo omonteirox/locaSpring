@@ -5,7 +5,6 @@ import ifgoiano.FGSeguradora.DTO.TerceirizadoCreateDTO;
 import ifgoiano.FGSeguradora.DTO.TerceirizadoDTO;
 import ifgoiano.FGSeguradora.exception.ObjectNotFoundException;
 import ifgoiano.FGSeguradora.mapper.TerceirizadoMapper;
-import ifgoiano.FGSeguradora.models.Terceirizado;
 import ifgoiano.FGSeguradora.repository.TerceirizadoRepository;
 import ifgoiano.FGSeguradora.service.TerceirizadoService;
 import io.swagger.annotations.Api;
