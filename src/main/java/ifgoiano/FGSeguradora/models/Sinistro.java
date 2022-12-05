@@ -21,12 +21,9 @@ public class Sinistro {
     
     @Column(nullable = false)
     private String descricao;
+    private long clienteID;
+    private long contratoID;
+    private long seguroID;
 
-    @OneToOne
-    private Cliente cliente;
-    @OneToOne
-    private Contrato contrato;
-    @OneToOne
-    private Seguro seguro;
 
 }

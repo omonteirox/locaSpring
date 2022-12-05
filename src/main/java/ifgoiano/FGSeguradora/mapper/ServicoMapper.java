@@ -2,9 +2,7 @@ package ifgoiano.FGSeguradora.mapper;
 
 import ifgoiano.FGSeguradora.DTO.ServicoCreateDTO;
 import ifgoiano.FGSeguradora.DTO.ServicoDTO;
-import ifgoiano.FGSeguradora.DTO.TerceirizadoCreateDTO;
 import ifgoiano.FGSeguradora.models.Servico;
-import ifgoiano.FGSeguradora.models.Terceirizado;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 

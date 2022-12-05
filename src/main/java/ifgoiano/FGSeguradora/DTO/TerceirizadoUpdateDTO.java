@@ -6,14 +6,13 @@ import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotEmpty;
-import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class TerceirizadoUpdateDTO {
 
-    Long id;
+//    Long id;
     @NotEmpty(message = "Campo RAZAOSOCIAL é requerido.")
     @Length(min = 3, max = 100, message = "O campo RAZAOSOCIAL deve possuir entre 3 á 100 caracteres.")
     private String razaoSocial;

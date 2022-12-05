@@ -1,13 +1,10 @@
 package ifgoiano.FGSeguradora.controller;
 
 import ifgoiano.FGSeguradora.DTO.ContratoDTO;
-import ifgoiano.FGSeguradora.DTO.GerenteDTO;
 import ifgoiano.FGSeguradora.models.Contrato;
 import ifgoiano.FGSeguradora.service.ContratoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.hateoas.Link;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;

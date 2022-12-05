@@ -1,12 +1,10 @@
 package ifgoiano.FGSeguradora.DTO;
 
-import ifgoiano.FGSeguradora.models.Servico;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.util.List;
 

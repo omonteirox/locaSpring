@@ -2,13 +2,12 @@ package ifgoiano.FGSeguradora.models;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import ifgoiano.FGSeguradora.DTO.ServicoDTO;
-import ifgoiano.FGSeguradora.DTO.TerceirizadoDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -36,7 +35,7 @@ public class Terceirizado {
     private String cnpj;
 
     @ManyToMany(targetEntity = Servico.class, cascade = CascadeType.ALL)
-    private List<Servico> servicos;
+    private List<Servico> servicos ;
 
 
 

@@ -3,6 +3,9 @@
   <component name="JpaBuddyIdeaProjectConfig">
     <option name="defaultUnitInitialized" value="true" />
     <option name="renamerInitialized" value="true" />
+    <option name="isSnapshotDb" value="false" />
+    <option name="snapshotDbValue" value="3444af75-2bb0-4c8e-b77f-795e18d092dd" />
+    <option name="snapshotModelValue" value="Default" />
     <option name="newEntityIdType" value="Long" />
     <option name="newEntityIdStrategy" value="Auto" />
   </component>
