@@ -2,6 +2,7 @@ package ifgoiano.FGSeguradora.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,6 +10,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -32,7 +34,7 @@ public class Servico {
 
 
     @ManyToMany(targetEntity = Terceirizado.class, mappedBy = "servicos", cascade = CascadeType.ALL)
-    private List<Terceirizado> terceirizados ;
+    private List<Terceirizado> terceirizados  ;
 
 
 }

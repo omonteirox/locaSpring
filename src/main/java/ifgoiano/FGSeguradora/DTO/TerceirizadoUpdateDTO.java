@@ -12,7 +12,7 @@ import javax.validation.constraints.NotEmpty;
 @NoArgsConstructor
 public class TerceirizadoUpdateDTO {
 
-    Long id;
+//    Long id;
     @NotEmpty(message = "Campo RAZAOSOCIAL é requerido.")
     @Length(min = 3, max = 100, message = "O campo RAZAOSOCIAL deve possuir entre 3 á 100 caracteres.")
     private String razaoSocial;

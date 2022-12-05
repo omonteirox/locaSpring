@@ -31,11 +31,7 @@ public class ClienteService {
         this.caminhoneteService = caminhoneteService;
         this.clienteMapper = clienteMapper;
     }
-
-
-//    LISTAR SEGUROS, SALVAR ID DE AUTOMOVEL E LISTAR AUTOMOVEL
-
-
+    
 
     public List<Cliente> findAll() {
         return repository.findAll();
