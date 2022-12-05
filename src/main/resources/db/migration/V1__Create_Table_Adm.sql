@@ -171,3 +171,10 @@ CREATE TABLE IF NOT EXISTS "vendedor"
     PRIMARY KEY ("id")
 )
 ;
+CREATE TABLE IF NOT EXISTS "cliente_automoveis" (
+                                      "cliente_id" SERIAL NOT NULL,
+                                      "automoveis_id" SERIAL NOT NULL,
+                                      CONSTRAINT "fkapms6q4o4avhhg3fjj8p4r961" FOREIGN KEY ("automoveis_id") REFERENCES "automovel" ("id") ON UPDATE NO ACTION ON DELETE NO ACTION,
+                                      CONSTRAINT "fkfgfgf2c4j3w2vr23wvpajn6em" FOREIGN KEY ("cliente_id") REFERENCES "cliente" ("id") ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+;

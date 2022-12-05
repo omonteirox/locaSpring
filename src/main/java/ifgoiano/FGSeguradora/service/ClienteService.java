@@ -48,8 +48,6 @@ public class ClienteService {
         List<Automovel> automovelList = new ArrayList<>();
         for(Long id: objDTO.getAutomoveis_id()) {
             automovelList.add(carroService.verificaSeExiste(id));
-            automovelList.add(motoService.verificaSeExiste(id));
-            automovelList.add(caminhoneteService.verificaSeExiste(id));
         }
         Cliente clientecreate = clienteMapper.toClienteCreate(objDTO);
         clientecreate.setNome(objDTO.getNome());
