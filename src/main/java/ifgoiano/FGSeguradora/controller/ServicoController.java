@@ -26,20 +26,6 @@ public class ServicoController {
     @Autowired
     public ServicoRepository repository;
 
-    @PostMapping("/create")
-    public ResponseEntity<MensagemRespostaDTO> create(@RequestBody ServicoDTO servico) throws ObjectNotFoundException {
-        var obj = service.create(servico);
-        return ResponseEntity.status(HttpStatus.CREATED).body(obj);
-    }
-
-    @DeleteMapping("/deletar/{id}")
-
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-        service.delete(id);
-        return ResponseEntity.noContent().build();
-
-    }
-
     @GetMapping("/detalhes/{id}")
 
     public ResponseEntity<ServicoDTO> findById(@PathVariable Long id) throws ObjectDeletedException {
@@ -50,16 +36,8 @@ public class ServicoController {
         else return  ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 
     }
-
     @GetMapping("/findAll")
     public List<ServicoDTO> findAll() {
         return service.findAll();
-    }
-
-    @PutMapping("/atualizar/{id}")
-
-    public Servico update(@PathVariable Long id, @RequestBody Servico role) {
-        return service.update(id, role);
-
     }
 }
