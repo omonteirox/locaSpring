@@ -25,7 +25,6 @@ public class Pessoa {
     private String cpf;
 
     @JsonFormat(pattern = "dd/MM/yyyy")
-    //@DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataNascimento;
 
     private Genero genero;
