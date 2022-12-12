@@ -19,15 +19,7 @@ public class ResourceExceptionHandler {
                 e.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
     }
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<StandardError> methodArgumentNotValidException(MethodArgumentNotValidException e){
-        ValidationError error = new ValidationError(
-                System.currentTimeMillis(), HttpStatus.BAD_REQUEST.value(),"Erro na validação dos campos!");
-        for (FieldError x : e.getBindingResult().getFieldErrors()){
-            error.addError(x.getField(),x.getDefaultMessage());
-        }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
-    }
+
 
     @ExceptionHandler(DataIntegratyViolationException.class)
     public ResponseEntity<StandardError> dataIntegratyViolationException(DataIntegratyViolationException e){
